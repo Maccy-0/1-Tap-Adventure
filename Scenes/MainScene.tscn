@@ -25,7 +25,7 @@ position = Vector2(479, 279)
 texture = ExtResource("1_hpc76")
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2(816, 260)
+position = Vector2(650, 319)
 script = ExtResource("2_tr2i4")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
@@ -43,13 +43,6 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_qxria")
 offset = Vector2(0, -20)
 
-[node name="SwordSprite2" type="Sprite2D" parent="Player/RemoteTransform2D/PlayerSprite"]
-position = Vector2(-72, -76)
-rotation = -3.1415925
-scale = Vector2(2, -2)
-texture = ExtResource("4_qxria")
-offset = Vector2(0, -20)
-
 [node name="Arrow" type="Sprite2D" parent="Player"]
 scale = Vector2(0.75, 0.1)
 texture = ExtResource("1_hpc76")
@@ -58,12 +51,13 @@ offset = Vector2(150, 0)
 [node name="Area2D" type="Area2D" parent="Player"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
-position = Vector2(1, -45)
+position = Vector2(35, -57)
 shape = SubResource("CircleShape2D_qxria")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 
 [node name="Dummy" type="Node2D" parent="."]
+position = Vector2(276, -32)
 script = ExtResource("4_7rqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Dummy"]
@@ -85,7 +79,7 @@ offset_bottom = 159.0
 show_percentage = false
 
 [node name="Dummy2" type="Node2D" parent="."]
-position = Vector2(72, -105)
+position = Vector2(285, 332)
 script = ExtResource("4_7rqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Dummy2"]
@@ -98,6 +92,35 @@ texture = ExtResource("1_hpc76")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy2/Sprite2D/StaticBody2D"]
 shape = SubResource("RectangleShape2D_qxria")
+
+[node name="HealthBar" type="ProgressBar" parent="Dummy2"]
+offset_left = 620.0
+offset_top = 149.0
+offset_right = 684.0
+offset_bottom = 159.0
+show_percentage = false
+
+[node name="Dummy3" type="Node2D" parent="."]
+position = Vector2(379, 93)
+script = ExtResource("4_7rqgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dummy3"]
+modulate = Color(0.45904118, 0.19849232, 1.92523e-07, 1)
+position = Vector2(652, 192)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hpc76")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Dummy3/Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy3/Sprite2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_qxria")
+
+[node name="HealthBar" type="ProgressBar" parent="Dummy3"]
+offset_left = 620.0
+offset_top = 149.0
+offset_right = 684.0
+offset_bottom = 159.0
+show_percentage = false
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
