@@ -21,6 +21,15 @@ var enemies_in_range = []
 var attack_cooldown = 2.0
 var attack_timer = 0.0
 
+var sword
+var sword_start_pos
+var sword_start_rot
+
+func _ready():
+	sword = $RemoteTransform2D/PlayerSprite/SwordSprite
+	sword_start_pos = sword.position
+	sword_start_rot = sword.rotation
+
 func _input(event):
 	
 	if event.is_action_pressed("action"):
@@ -130,25 +139,21 @@ func try_attack():
 	perform_attack(target)
 
 func perform_attack(target):
-	print("Attacking:", target.name)
+	animate_sword_attack()
 	
-	# Spawn attack visual (optional for now)
-	spawn_attack_effect(target.global_position)
-	
-	# Delay damage by 0.1s
 	await get_tree().create_timer(0.1).timeout
 	
 	if is_instance_valid(target):
 		target.take_damage(10)
 
-func spawn_attack_effect(pos):
-	var sprite = Sprite2D.new()
-	sprite.texture = preload("res://Assets/Sword Sprite.png")
-	sprite.global_position = global_position
-	$RemoteTransform2D/PlayerSprite/SwordSprite
-	add_child(sprite)
-	
-	# Move toward target
+
+func animate_sword_attack():
 	var tween = create_tween()
-	tween.tween_property(sprite, "global_position", pos, 0.1)
-	tween.tween_callback(sprite.queue_free)
+	
+	# Move to center + rotate
+	tween.tween_property(sword, "position", Vector2.ZERO, 0.05)
+	tween.parallel().tween_property(sword, "rotation", sword_start_rot + PI, 0.05)
+	
+	# Return to original
+	tween.tween_property(sword, "position", sword_start_pos, 0.05)
+	tween.parallel().tween_property(sword, "rotation", sword_start_rot, 0.05)

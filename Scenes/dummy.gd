@@ -9,6 +9,7 @@ var hit_color = Color(1,0.3,0.3)
 
 func _ready():
 	add_to_group("enemies")
+	$HealthBar.max_value = max_health
 
 func take_damage(amount):
 	health -= amount

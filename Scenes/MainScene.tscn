@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=10 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
 [ext_resource type="Script" uid="uid://cjtghhto426ti" path="res://Scenes/player_sprite.gd" id="3_nhkr4"]
 [ext_resource type="Script" uid="uid://c3pshbe8jc33g" path="res://Scenes/dummy.gd" id="4_7rqgy"]
 [ext_resource type="Texture2D" uid="uid://m4ygito7gm0d" path="res://Assets/Sword Sprite.png" id="4_qxria"]
+[ext_resource type="Script" uid="uid://cv66gc2qyorml" path="res://Scenes/area_2d.gd" id="5_q68mp"]
+[ext_resource type="Texture2D" uid="uid://88nip11epjvk" path="res://Sprites/Circle-export.png" id="6_q68mp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxria"]
 radius = 101.0
@@ -25,7 +27,7 @@ position = Vector2(479, 279)
 texture = ExtResource("1_hpc76")
 
 [node name="Player" type="Node2D" parent="."]
-position = Vector2(816, 260)
+position = Vector2(650, 319)
 script = ExtResource("2_tr2i4")
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
@@ -43,27 +45,26 @@ scale = Vector2(2, 2)
 texture = ExtResource("4_qxria")
 offset = Vector2(0, -20)
 
-[node name="SwordSprite2" type="Sprite2D" parent="Player/RemoteTransform2D/PlayerSprite"]
-position = Vector2(-72, -76)
-rotation = -3.1415925
-scale = Vector2(2, -2)
-texture = ExtResource("4_qxria")
-offset = Vector2(0, -20)
-
 [node name="Arrow" type="Sprite2D" parent="Player"]
 scale = Vector2(0.75, 0.1)
 texture = ExtResource("1_hpc76")
 offset = Vector2(150, 0)
 
 [node name="Area2D" type="Area2D" parent="Player"]
+script = ExtResource("5_q68mp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
-position = Vector2(1, -45)
+position = Vector2(35, -57)
 shape = SubResource("CircleShape2D_qxria")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Area2D/CollisionShape2D"]
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("6_q68mp")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 
 [node name="Dummy" type="Node2D" parent="."]
+position = Vector2(276, -32)
 script = ExtResource("4_7rqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Dummy"]
@@ -85,7 +86,7 @@ offset_bottom = 159.0
 show_percentage = false
 
 [node name="Dummy2" type="Node2D" parent="."]
-position = Vector2(72, -105)
+position = Vector2(285, 332)
 script = ExtResource("4_7rqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Dummy2"]
@@ -98,6 +99,35 @@ texture = ExtResource("1_hpc76")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy2/Sprite2D/StaticBody2D"]
 shape = SubResource("RectangleShape2D_qxria")
+
+[node name="HealthBar" type="ProgressBar" parent="Dummy2"]
+offset_left = 620.0
+offset_top = 149.0
+offset_right = 684.0
+offset_bottom = 159.0
+show_percentage = false
+
+[node name="Dummy3" type="Node2D" parent="."]
+position = Vector2(379, 93)
+script = ExtResource("4_7rqgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dummy3"]
+modulate = Color(0.45904118, 0.19849232, 1.92523e-07, 1)
+position = Vector2(652, 192)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hpc76")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Dummy3/Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy3/Sprite2D/StaticBody2D"]
+shape = SubResource("RectangleShape2D_qxria")
+
+[node name="HealthBar" type="ProgressBar" parent="Dummy3"]
+offset_left = 620.0
+offset_top = 149.0
+offset_right = 684.0
+offset_bottom = 159.0
+show_percentage = false
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
