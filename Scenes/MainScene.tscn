@@ -1,6 +1,8 @@
-[gd_scene load_steps=2 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=4 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
+[ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
+[ext_resource type="Script" uid="uid://cjtghhto426ti" path="res://Scenes/player_sprite.gd" id="3_nhkr4"]
 
 [node name="Node2D" type="Node2D"]
 
@@ -15,5 +17,21 @@ position = Vector2(479, 279)
 texture = ExtResource("1_hpc76")
 
 [node name="Player" type="Node2D" parent="."]
+position = Vector2(816, 260)
+script = ExtResource("2_tr2i4")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("PlayerSprite")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player/RemoteTransform2D"]
+modulate = Color(0, 0, 1, 1)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hpc76")
+script = ExtResource("3_nhkr4")
+
+[node name="Arrow" type="Sprite2D" parent="Player"]
+scale = Vector2(0.75, 0.1)
+texture = ExtResource("1_hpc76")
+offset = Vector2(150, 0)
 
 [node name="EnemySpawner" type="Node2D" parent="."]
