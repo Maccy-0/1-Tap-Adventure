@@ -17,6 +17,9 @@ var backtimer = 0
 
 var enemies_in_range = []
 
+var max_health = 10
+var health = 10
+
 var attack_cooldown = 2.0
 var attack_timer = 0.0
 
@@ -26,6 +29,7 @@ var sword_start_rot
 var facing_angle = 0.0
 
 func _ready():
+	add_to_group("player")
 	sword = $RemoteTransform2D/PlayerSprite/SwordSprite
 	sword_start_pos = sword.position
 	sword_start_rot = sword.rotation
@@ -162,3 +166,13 @@ func animate_sword_attack():
 	# Return to original
 	tween.tween_property(sword, "position", sword_start_pos, 0.05)
 	tween.parallel().tween_property(sword, "rotation", sword_start_rot, 0.05)
+
+func take_damage(amount):
+	health -= amount
+	health = max(health, 0)
+	print("Player health:", health)
+
+func heal(amount):
+	health += amount
+	health = min(health, max_health)
+	print("Player healed:", health)
