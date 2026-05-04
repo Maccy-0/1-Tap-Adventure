@@ -1,7 +1,7 @@
 extends Node2D
 
-var max_health = 20
-var health = 20
+var max_health = 10
+var health = 10
 
 var hit_flash_time = 0.1
 var normal_color = Color(1,1,1)

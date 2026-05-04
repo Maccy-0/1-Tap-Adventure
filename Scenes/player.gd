@@ -5,7 +5,6 @@ const DOUBLE_TAP_TIME = 0.3
 
 var press_time = 0.0
 var last_tap_time = -1.0
-var holding = false
 var spin_speed = 2.0
 var spin_dir = 1
 var facing_direction = Vector2.UP.rotated(rotation)
@@ -24,6 +23,7 @@ var attack_timer = 0.0
 var sword
 var sword_start_pos
 var sword_start_rot
+var facing_angle = 0.0
 
 func _ready():
 	sword = $RemoteTransform2D/PlayerSprite/SwordSprite
@@ -34,12 +34,12 @@ func _input(event):
 	
 	if event.is_action_pressed("action"):
 		press_time = Time.get_ticks_msec() / 1000.0
-		holding = true
+		Global.holding = true
 
 	if event.is_action_released("action"):
 		var now = Time.get_ticks_msec() / 1000.0
 		var held_duration = now - press_time
-		holding = false
+		Global.holding = false
 
 		if held_duration < HOLD_THRESHOLD:
 			# Tap
@@ -65,17 +65,21 @@ func _process(delta: float) -> void:
 		#$PlayerSprite.rotation = -rotation
 		#arrow.rotation = rotation
 	
-	if holding: #if holding and state == SPINNING:
+	if Global.holding: #if holding and state == SPINNING:
 		if Time.get_ticks_msec() / 1000.0 - press_time > HOLD_THRESHOLD:
 			#print("forward")
 			spinning = false
 			var direction = Vector2.RIGHT.rotated(rotation)
 			velocity = direction * speed
+			
+			facing_angle = direction.angle()
 	else:
 		velocity = Vector2.ZERO
 		spinning = true
 			
 func _physics_process(delta):
+	#get_closest_enemy()
+	
 	position += velocity * delta
 	
 	#print(backtimer)
@@ -89,6 +93,7 @@ func _physics_process(delta):
 	if attack_timer <= 0:
 		attack_timer = attack_cooldown
 		try_attack()
+		
 
 func get_enemy_root(node):
 	while node != null:
@@ -127,7 +132,7 @@ func get_closest_enemy():
 		if dist < closest_dist:
 			closest_dist = dist
 			closest = enemy
-
+			
 	return closest
 
 func try_attack():

@@ -1,4 +1,4 @@
 extends Sprite2D
 
 func _process(_delta):
-	global_rotation = 0
+	global_rotation = $"../..".facing_angle + PI/2
