@@ -1,8 +1,12 @@
-[gd_scene load_steps=4 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=6 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
 [ext_resource type="Script" uid="uid://cjtghhto426ti" path="res://Scenes/player_sprite.gd" id="3_nhkr4"]
+[ext_resource type="Script" uid="uid://c3pshbe8jc33g" path="res://Scenes/dummy.gd" id="4_7rqgy"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_qxria"]
+radius = 111.01801
 
 [node name="Node2D" type="Node2D"]
 
@@ -34,4 +38,18 @@ scale = Vector2(0.75, 0.1)
 texture = ExtResource("1_hpc76")
 offset = Vector2(150, 0)
 
+[node name="Area2D" type="Area2D" parent="Player"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource("CircleShape2D_qxria")
+
 [node name="EnemySpawner" type="Node2D" parent="."]
+
+[node name="Dummy" type="Node2D" parent="."]
+script = ExtResource("4_7rqgy")
+
+[node name="Sprite2D" type="Sprite2D" parent="Dummy"]
+modulate = Color(0.45904118, 0.19849232, 1.92523e-07, 1)
+position = Vector2(652, 192)
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("1_hpc76")
