@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=18 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
@@ -10,12 +10,21 @@
 [ext_resource type="Texture2D" uid="uid://88nip11epjvk" path="res://Sprites/Circle-export.png" id="6_q68mp"]
 [ext_resource type="Texture2D" uid="uid://dic24a1v85qvu" path="res://Assets/Red Pirate Enemy.png" id="8_f140w"]
 [ext_resource type="Script" uid="uid://dq4w0ntqhmlvm" path="res://Scenes/health_barrel.gd" id="10_4b75m"]
+[ext_resource type="Texture2D" uid="uid://blc3hsl8esn4u" path="res://Assets/Blue Pirate Enemy.png" id="11_8ju71"]
+[ext_resource type="Script" uid="uid://cbpfifj1pcpms" path="res://Scenes/ranger.gd" id="11_xb4mg"]
+[ext_resource type="Script" uid="uid://bqwdo3h11onfn" path="res://Scenes/health_bar.gd" id="13_6t1o7"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_6t1o7"]
+radius = 14.0
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxria"]
 radius = 101.0
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_qxria"]
 size = Vector2(128, 128)
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_xb4mg"]
+radius = 278.01617
 
 [node name="Node2D" type="Node2D"]
 
@@ -49,6 +58,11 @@ scale = Vector2(0.33, 0.33)
 texture = ExtResource("4_qxria")
 offset = Vector2(0, -20)
 
+[node name="StaticBody2D" type="StaticBody2D" parent="Player/RemoteTransform2D/PlayerSprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/RemoteTransform2D/PlayerSprite/StaticBody2D"]
+shape = SubResource("CircleShape2D_6t1o7")
+
 [node name="Arrow" type="Sprite2D" parent="Player"]
 scale = Vector2(0.75, 0.1)
 texture = ExtResource("1_hpc76")
@@ -67,12 +81,12 @@ texture = ExtResource("6_q68mp")
 [node name="EnemySpawner" type="Node2D" parent="."]
 
 [node name="Dummy" type="Node2D" parent="."]
-position = Vector2(276, -32)
+position = Vector2(940, 132)
 script = ExtResource("4_7rqgy")
 
 [node name="Sprite2D" type="Sprite2D" parent="Dummy"]
 texture_filter = 1
-position = Vector2(652, 192)
+position = Vector2(1, 0)
 scale = Vector2(3, 3)
 texture = ExtResource("8_f140w")
 
@@ -83,65 +97,19 @@ scale = Vector2(0.16, 0.16)
 shape = SubResource("RectangleShape2D_qxria")
 
 [node name="HealthBar" type="ProgressBar" parent="Dummy"]
-offset_left = 620.0
-offset_top = 149.0
-offset_right = 684.0
-offset_bottom = 159.0
-show_percentage = false
-
-[node name="Dummy2" type="Node2D" parent="."]
-position = Vector2(386, 67)
-script = ExtResource("4_7rqgy")
-
-[node name="Sprite2D" type="Sprite2D" parent="Dummy2"]
-texture_filter = 1
-position = Vector2(652, 192)
-scale = Vector2(3, 3)
-texture = ExtResource("8_f140w")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Dummy2/Sprite2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy2/Sprite2D/StaticBody2D"]
-scale = Vector2(0.16, 0.16)
-shape = SubResource("RectangleShape2D_qxria")
-
-[node name="HealthBar" type="ProgressBar" parent="Dummy2"]
-offset_left = 620.0
-offset_top = 149.0
-offset_right = 684.0
-offset_bottom = 159.0
-show_percentage = false
-
-[node name="Dummy3" type="Node2D" parent="."]
-position = Vector2(270, 249)
-script = ExtResource("4_7rqgy")
-
-[node name="Sprite2D" type="Sprite2D" parent="Dummy3"]
-texture_filter = 1
-position = Vector2(652, 192)
-scale = Vector2(3, 3)
-texture = ExtResource("8_f140w")
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Dummy3/Sprite2D"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Dummy3/Sprite2D/StaticBody2D"]
-scale = Vector2(0.16, 0.16)
-shape = SubResource("RectangleShape2D_qxria")
-
-[node name="HealthBar" type="ProgressBar" parent="Dummy3"]
-offset_left = 620.0
-offset_top = 149.0
-offset_right = 684.0
-offset_bottom = 159.0
+offset_left = -31.0
+offset_top = -43.0
+offset_right = 33.0
+offset_bottom = -33.0
 show_percentage = false
 
 [node name="HealthBarrel" type="Node2D" parent="."]
-position = Vector2(90, 307)
+position = Vector2(708, 513)
 script = ExtResource("10_4b75m")
 
 [node name="Sprite2D" type="Sprite2D" parent="HealthBarrel"]
 texture_filter = 1
-position = Vector2(652, 192)
+position = Vector2(-1, 0)
 scale = Vector2(3, 3)
 texture = ExtResource("3_0iob3")
 
@@ -152,13 +120,47 @@ scale = Vector2(0.16, 0.16)
 shape = SubResource("RectangleShape2D_qxria")
 
 [node name="HealthBar" type="ProgressBar" parent="HealthBarrel"]
-offset_left = 620.0
-offset_top = 149.0
-offset_right = 684.0
-offset_bottom = 159.0
+offset_left = -33.0
+offset_top = -43.0
+offset_right = 31.0
+offset_bottom = -33.0
 show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="Ranger" type="Node2D" parent="."]
+position = Vector2(245, 324)
+script = ExtResource("11_xb4mg")
+
+[node name="Sprite2D" type="Sprite2D" parent="Ranger"]
+texture_filter = 1
+position = Vector2(1, 0)
+rotation = 1.5707964
+scale = Vector2(3, 3)
+texture = ExtResource("11_8ju71")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Ranger/Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranger/Sprite2D/StaticBody2D"]
+scale = Vector2(0.16, 0.16)
+shape = SubResource("RectangleShape2D_qxria")
+
+[node name="HealthBar" type="ProgressBar" parent="Ranger"]
+offset_left = -31.0
+offset_top = -43.0
+offset_right = 33.0
+offset_bottom = -33.0
+show_percentage = false
+script = ExtResource("13_6t1o7")
+
+[node name="Area2D" type="Area2D" parent="Ranger"]
+position = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranger/Area2D"]
+shape = SubResource("CircleShape2D_xb4mg")
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
 [connection signal="body_shape_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Player/Area2D" to="Player" method="_on_area_2d_body_shape_exited"]
+[connection signal="body_shape_entered" from="Ranger/Area2D" to="Ranger" method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Ranger/Area2D" to="Ranger" method="_on_area_2d_body_shape_exited"]

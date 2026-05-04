@@ -14,6 +14,7 @@ var velocity = Vector2.ZERO
 var spinning = true
 var backing = false
 var backtimer = 0
+	
 
 var enemies_in_range = []
 
@@ -107,20 +108,20 @@ func get_enemy_root(node):
 	return null
 
 func _on_area_2d_body_shape_entered(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	print("something here")
+	#print("something here")
 	var enemy = get_enemy_root(body)
 
 	if enemy:
 		enemies_in_range.append(enemy)
-		print("Found enemy")
+		#print("Found enemy")
 
 
 func _on_area_2d_body_shape_exited(body_rid: RID, body: Node2D, body_shape_index: int, local_shape_index: int) -> void:
-	print("something gone")
+	#print("something gone")
 	var enemy = get_enemy_root(body)
 	if enemy:
 		enemies_in_range.erase(enemy)
-		print("Lost enemy")
+		#print("Lost enemy")
 
 
 func get_closest_enemy():
