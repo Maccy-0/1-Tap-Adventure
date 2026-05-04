@@ -8,6 +8,7 @@ var normal_color = Color(1,1,1)
 var hit_color = Color(1,0.3,0.3)
 
 var enemies_in_range
+var timer = 0
 
 func _ready():
 	add_to_group("enemies")
@@ -33,6 +34,21 @@ func flash_red():
 	await get_tree().create_timer(hit_flash_time).timeout
 	
 	modulate = normal_color
+
+func _physics_process(delta):
+	#print(enemies_in_range)
+	if enemies_in_range != null:
+		timer += delta
+		if timer > 3:
+			if enemies_in_range != null:
+				#var bullet = $"../Bullet".instantiate()
+				#bullet.global_position = global_position
+				#bullet.rotation = rotation
+				#get_tree().current_scene.add_child(bullet)
+				print("Fire")
+				timer = 0
+			else:
+				timer = 0
 
 func update_health_bar():
 	var bar = $HealthBar

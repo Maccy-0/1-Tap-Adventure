@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=20 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
@@ -12,7 +12,9 @@
 [ext_resource type="Script" uid="uid://dq4w0ntqhmlvm" path="res://Scenes/health_barrel.gd" id="10_4b75m"]
 [ext_resource type="Texture2D" uid="uid://blc3hsl8esn4u" path="res://Assets/Blue Pirate Enemy.png" id="11_8ju71"]
 [ext_resource type="Script" uid="uid://cbpfifj1pcpms" path="res://Scenes/ranger.gd" id="11_xb4mg"]
+[ext_resource type="Texture2D" uid="uid://bluwc0x5m8l8y" path="res://Assets/Flintlock.png" id="13_5qxwa"]
 [ext_resource type="Script" uid="uid://bqwdo3h11onfn" path="res://Scenes/health_bar.gd" id="13_6t1o7"]
+[ext_resource type="PackedScene" uid="uid://d36txlgpwx75l" path="res://Assets/bullet.tscn" id="15_xc4hf"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6t1o7"]
 radius = 14.0
@@ -144,6 +146,11 @@ texture = ExtResource("11_8ju71")
 scale = Vector2(0.16, 0.16)
 shape = SubResource("RectangleShape2D_qxria")
 
+[node name="Sprite2D" type="Sprite2D" parent="Ranger/Sprite2D"]
+texture_filter = 1
+position = Vector2(7.9999995, -12.333334)
+texture = ExtResource("13_5qxwa")
+
 [node name="HealthBar" type="ProgressBar" parent="Ranger"]
 offset_left = -31.0
 offset_top = -43.0
@@ -157,6 +164,9 @@ position = Vector2(1, 0)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranger/Area2D"]
 shape = SubResource("CircleShape2D_xb4mg")
+
+[node name="Bullet" parent="." instance=ExtResource("15_xc4hf")]
+position = Vector2(656, 121)
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
