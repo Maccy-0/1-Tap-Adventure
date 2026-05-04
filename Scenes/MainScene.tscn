@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dx18gfjy68noj"]
+
+[ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
+
+[node name="Node2D" type="Node2D"]
+
+[node name="Test" type="Sprite2D" parent="."]
+position = Vector2(300, 284)
+texture = ExtResource("1_hpc76")
+
+[node name="Player" type="Node2D" parent="."]
+
+[node name="EnemySpawner" type="Node2D" parent="."]
