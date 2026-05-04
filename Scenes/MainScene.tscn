@@ -5,7 +5,13 @@
 [node name="Node2D" type="Node2D"]
 
 [node name="Test" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 0, 1)
 position = Vector2(300, 284)
+texture = ExtResource("1_hpc76")
+
+[node name="Test2" type="Sprite2D" parent="."]
+modulate = Color(1, 0, 0, 1)
+position = Vector2(479, 279)
 texture = ExtResource("1_hpc76")
 
 [node name="Player" type="Node2D" parent="."]
