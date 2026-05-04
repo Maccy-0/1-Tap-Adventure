@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=10 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
 [ext_resource type="Script" uid="uid://cjtghhto426ti" path="res://Scenes/player_sprite.gd" id="3_nhkr4"]
 [ext_resource type="Script" uid="uid://c3pshbe8jc33g" path="res://Scenes/dummy.gd" id="4_7rqgy"]
 [ext_resource type="Texture2D" uid="uid://m4ygito7gm0d" path="res://Assets/Sword Sprite.png" id="4_qxria"]
+[ext_resource type="Script" uid="uid://cv66gc2qyorml" path="res://Scenes/area_2d.gd" id="5_q68mp"]
+[ext_resource type="Texture2D" uid="uid://88nip11epjvk" path="res://Sprites/Circle-export.png" id="6_q68mp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_qxria"]
 radius = 101.0
@@ -49,10 +51,15 @@ texture = ExtResource("1_hpc76")
 offset = Vector2(150, 0)
 
 [node name="Area2D" type="Area2D" parent="Player"]
+script = ExtResource("5_q68mp")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
 position = Vector2(35, -57)
 shape = SubResource("CircleShape2D_qxria")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Area2D/CollisionShape2D"]
+scale = Vector2(0.075, 0.075)
+texture = ExtResource("6_q68mp")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 
