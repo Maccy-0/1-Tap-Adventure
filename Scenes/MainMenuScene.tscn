@@ -1,0 +1,76 @@
+[gd_scene load_steps=3 format=3 uid="uid://bitbr4opgixwn"]
+
+[ext_resource type="Texture2D" uid="uid://c4pf3gvx7wmlj" path="res://Todd_Assets/BasicTextures/1Artboard 1-20.jpg" id="1_sb72h"]
+
+[sub_resource type="StyleBoxTexture" id="StyleBoxTexture_47sjk"]
+texture = ExtResource("1_sb72h")
+
+[node name="MainMenuScene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Panel" type="Panel" parent="."]
+self_modulate = Color(2.3102762e-06, 0.6394416, 0.8979573, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -222.75
+offset_top = -93.04762
+offset_right = 222.75
+offset_bottom = 93.04762
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 17
+
+[node name="Tutorial" type="Button" parent="VBoxContainer"]
+self_modulate = Color(0.96, 0.96, 0.96, 1)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+button_mask = 0
+text = "Tutorial"
+
+[node name="Endless" type="Button" parent="VBoxContainer"]
+self_modulate = Color(0.96, 0.96, 0.96, 1)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+button_mask = 0
+text = "Endless"
+
+[node name="Settings" type="Button" parent="VBoxContainer"]
+self_modulate = Color(0.96, 0.96, 0.96, 1)
+layout_mode = 2
+size_flags_vertical = 3
+theme_override_font_sizes/font_size = 25
+button_mask = 0
+text = "Settings"
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -163.5
+offset_top = 88.0
+offset_right = 163.5
+offset_bottom = 137.0
+grow_horizontal = 2
+theme_override_font_sizes/font_size = 35
+text = "One Tap Adventure"
