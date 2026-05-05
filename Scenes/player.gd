@@ -71,7 +71,7 @@ func _process(delta: float) -> void:
 		#arrow.rotation = rotation
 	
 	if Global.holding: #if holding and state == SPINNING:
-		if Time.get_ticks_msec() / 1000.0 - press_time > HOLD_THRESHOLD:
+		if Time.get_ticks_msec() / 200.0 - press_time > HOLD_THRESHOLD:
 			#print("forward")
 			spinning = false
 			var direction = Vector2.RIGHT.rotated(rotation)

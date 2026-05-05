@@ -1,4 +1,4 @@
-[gd_scene load_steps=20 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=24 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
@@ -9,12 +9,16 @@
 [ext_resource type="Script" uid="uid://cv66gc2qyorml" path="res://Scenes/area_2d.gd" id="5_q68mp"]
 [ext_resource type="Texture2D" uid="uid://88nip11epjvk" path="res://Sprites/Circle-export.png" id="6_q68mp"]
 [ext_resource type="Texture2D" uid="uid://dic24a1v85qvu" path="res://Assets/Red Pirate Enemy.png" id="8_f140w"]
+[ext_resource type="Script" uid="uid://dqxd4td6bferm" path="res://Scenes/camera_2d.gd" id="8_i0j58"]
 [ext_resource type="Script" uid="uid://dq4w0ntqhmlvm" path="res://Scenes/health_barrel.gd" id="10_4b75m"]
 [ext_resource type="Texture2D" uid="uid://blc3hsl8esn4u" path="res://Assets/Blue Pirate Enemy.png" id="11_8ju71"]
 [ext_resource type="Script" uid="uid://cbpfifj1pcpms" path="res://Scenes/ranger.gd" id="11_xb4mg"]
 [ext_resource type="Texture2D" uid="uid://bluwc0x5m8l8y" path="res://Assets/Flintlock.png" id="13_5qxwa"]
 [ext_resource type="Script" uid="uid://bqwdo3h11onfn" path="res://Scenes/health_bar.gd" id="13_6t1o7"]
 [ext_resource type="PackedScene" uid="uid://d36txlgpwx75l" path="res://Assets/bullet.tscn" id="15_xc4hf"]
+[ext_resource type="Script" uid="uid://c8bmxasecdyk6" path="res://Scenes/blunder.gd" id="16_6rnll"]
+[ext_resource type="Texture2D" uid="uid://dchv2apoynxbw" path="res://Assets/Blunderbuss.png" id="17_enc0b"]
+[ext_resource type="Script" uid="uid://crkct5djaq86t" path="res://Scenes/enemy_counter.gd" id="18_hx8n4"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6t1o7"]
 radius = 14.0
@@ -29,16 +33,6 @@ size = Vector2(128, 128)
 radius = 278.01617
 
 [node name="Node2D" type="Node2D"]
-
-[node name="Test" type="Sprite2D" parent="."]
-modulate = Color(1, 1, 0, 1)
-position = Vector2(300, 284)
-texture = ExtResource("1_hpc76")
-
-[node name="Test2" type="Sprite2D" parent="."]
-modulate = Color(1, 0, 0, 1)
-position = Vector2(479, 279)
-texture = ExtResource("1_hpc76")
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(650, 319)
@@ -80,6 +74,14 @@ shape = SubResource("CircleShape2D_qxria")
 scale = Vector2(0.075, 0.075)
 texture = ExtResource("6_q68mp")
 
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_left = -2000
+limit_top = -1000
+limit_right = 2000
+limit_bottom = 1000
+position_smoothing_enabled = true
+script = ExtResource("8_i0j58")
+
 [node name="EnemySpawner" type="Node2D" parent="."]
 
 [node name="Dummy" type="Node2D" parent="."]
@@ -99,6 +101,7 @@ scale = Vector2(0.16, 0.16)
 shape = SubResource("RectangleShape2D_qxria")
 
 [node name="HealthBar" type="ProgressBar" parent="Dummy"]
+visible = false
 offset_left = -31.0
 offset_top = -43.0
 offset_right = 33.0
@@ -122,12 +125,16 @@ scale = Vector2(0.16, 0.16)
 shape = SubResource("RectangleShape2D_qxria")
 
 [node name="HealthBar" type="ProgressBar" parent="HealthBarrel"]
+visible = false
 offset_left = -33.0
 offset_top = -43.0
 offset_right = 31.0
 offset_bottom = -33.0
 show_percentage = false
 metadata/_edit_use_anchors_ = true
+
+[node name="Bullet" parent="." instance=ExtResource("15_xc4hf")]
+position = Vector2(656, 121)
 
 [node name="Ranger" type="Node2D" parent="."]
 position = Vector2(245, 324)
@@ -152,6 +159,7 @@ position = Vector2(7.9999995, -12.333334)
 texture = ExtResource("13_5qxwa")
 
 [node name="HealthBar" type="ProgressBar" parent="Ranger"]
+visible = false
 offset_left = -31.0
 offset_top = -43.0
 offset_right = 33.0
@@ -159,18 +167,76 @@ offset_bottom = -33.0
 show_percentage = false
 script = ExtResource("13_6t1o7")
 
-[node name="Area2D" type="Area2D" parent="Ranger"]
+[node name="rangeArea2D" type="Area2D" parent="Ranger"]
 position = Vector2(1, 0)
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranger/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Ranger/rangeArea2D"]
 shape = SubResource("CircleShape2D_xb4mg")
 
-[node name="Bullet" parent="." instance=ExtResource("15_xc4hf")]
-position = Vector2(656, 121)
+[node name="Blunder" type="Node2D" parent="."]
+position = Vector2(1034, 465)
+script = ExtResource("16_6rnll")
+
+[node name="Sprite2D" type="Sprite2D" parent="Blunder"]
+texture_filter = 1
+position = Vector2(1, 0)
+rotation = 1.5707964
+scale = Vector2(3, 3)
+texture = ExtResource("8_f140w")
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Blunder/Sprite2D"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blunder/Sprite2D/StaticBody2D"]
+scale = Vector2(0.16, 0.16)
+shape = SubResource("RectangleShape2D_qxria")
+
+[node name="Sprite2D" type="Sprite2D" parent="Blunder/Sprite2D"]
+texture_filter = 1
+position = Vector2(7.9999995, -13.666667)
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("17_enc0b")
+
+[node name="HealthBar" type="ProgressBar" parent="Blunder"]
+visible = false
+offset_left = -31.0
+offset_top = -43.0
+offset_right = 33.0
+offset_bottom = -33.0
+show_percentage = false
+script = ExtResource("13_6t1o7")
+
+[node name="rangeArea2D" type="Area2D" parent="Blunder"]
+position = Vector2(1, 0)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Blunder/rangeArea2D"]
+shape = SubResource("CircleShape2D_xb4mg")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Enemy Counter" type="Label" parent="CanvasLayer"]
+anchors_preset = -1
+anchor_left = 0.55200005
+anchor_top = -0.002
+anchor_right = 0.55200005
+anchor_bottom = -0.002
+offset_left = -261.90405
+offset_top = 1.296
+offset_right = 131.09595
+offset_bottom = 68.296
+theme_override_font_sizes/font_size = 48
+text = "Enemies left: 999"
+horizontal_alignment = 1
+script = ExtResource("18_hx8n4")
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
 [connection signal="body_shape_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Player/Area2D" to="Player" method="_on_area_2d_body_shape_exited"]
-[connection signal="body_shape_entered" from="Ranger/Area2D" to="Ranger" method="_on_area_2d_body_shape_entered"]
-[connection signal="body_shape_exited" from="Ranger/Area2D" to="Ranger" method="_on_area_2d_body_shape_exited"]
+[connection signal="body_entered" from="Ranger/rangeArea2D" to="Ranger" method="_on_range_area_2d_body_entered"]
+[connection signal="body_exited" from="Ranger/rangeArea2D" to="Ranger" method="_on_range_area_2d_body_exited"]
+[connection signal="body_shape_entered" from="Ranger/rangeArea2D" to="Ranger" method="_on_range_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Ranger/rangeArea2D" to="Ranger" method="_on_range_area_2d_body_shape_exited"]
+[connection signal="body_entered" from="Blunder/rangeArea2D" to="Blunder" method="_on_range_area_2d_body_entered"]
+[connection signal="body_exited" from="Blunder/rangeArea2D" to="Blunder" method="_on_range_area_2d_body_exited"]
+[connection signal="body_shape_entered" from="Blunder/rangeArea2D" to="Blunder" method="_on_range_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Blunder/rangeArea2D" to="Blunder" method="_on_range_area_2d_body_shape_exited"]

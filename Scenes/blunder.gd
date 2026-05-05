@@ -11,7 +11,7 @@ var enemies_in_range
 var timer = 0
 
 var player
-var detection_range = 400.0
+var detection_range = 500.0
 var bullet_scene = preload("res://Assets/bullet.tscn")
 
 func _ready():
@@ -52,7 +52,7 @@ func _physics_process(delta):
 		look_at(player.global_position)
 		
 		timer += delta
-		if timer > 3:
+		if timer > 4.5:
 			fire()
 			timer = 0
 	else:
@@ -60,12 +60,24 @@ func _physics_process(delta):
 		timer = 0
 
 func fire():
-	var bullet = bullet_scene.instantiate()
-	bullet.global_position = global_position
-	bullet.rotation = rotation
+	var bullet_count = 5
+	var spread_deg = 30.0
 	
-	get_parent().add_child(bullet)
-	print("Fire")
+	var base_rotation = rotation
+	var start_angle = deg_to_rad(-spread_deg / 2)
+	var step = deg_to_rad(spread_deg / (bullet_count - 1))
+	
+	for i in range(bullet_count):
+		var bullet = bullet_scene.instantiate()
+		
+		bullet.global_position = global_position
+		
+		var angle = start_angle + step * i
+		bullet.rotation = base_rotation + angle
+		
+		get_parent().add_child(bullet)
+	
+	print("Spread Fire")
 
 func update_health_bar():
 	var bar = $HealthBar
