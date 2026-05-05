@@ -1,6 +1,6 @@
-[gd_scene load_steps=41 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=42 format=3 uid="uid://dx18gfjy68noj"]
 
-[ext_resource type="Script" uid="uid://bpqd5v5pfqh8p" path="res://Scenes/better_player.gd" id="1_dtg5n"]
+[ext_resource type="Script" path="res://Scenes/better_player.gd" id="1_dtg5n"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://bnarmqxd6e5fd" path="res://Assets/Pirate Playable Character.png" id="3_0iob3"]
 [ext_resource type="Script" uid="uid://cjtghhto426ti" path="res://Scenes/player_sprite.gd" id="3_nhkr4"]
@@ -34,6 +34,7 @@
 [ext_resource type="Texture2D" uid="uid://b6spu40qh6cbo" path="res://Assets/Barrel Normal.png" id="20_rv6c1"]
 [ext_resource type="Texture2D" uid="uid://bb5be7x1qevyr" path="res://Assets/Barrel Healing.png" id="22_dtg5n"]
 [ext_resource type="AudioStream" uid="uid://b65lr5xb2npgp" path="res://Sounds/hit1.mp3" id="23_4sso6"]
+[ext_resource type="Texture2D" uid="uid://q3huqfy3h5jp" path="res://Todd_Assets/BasicTextures/circle.png" id="26_d0jji"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_d0jji"]
 
@@ -290,6 +291,41 @@ position = Vector2(656, 121)
 [node name="Ranger" type="Node2D" parent="."]
 position = Vector2(245, 324)
 script = ExtResource("11_xb4mg")
+
+[node name="Control" type="Control" parent="Ranger"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="Ranger/Control"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -95.0
+offset_top = -95.0
+offset_right = 95.0
+offset_bottom = 95.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.35, 0.35)
+pivot_offset = Vector2(95, 95)
+value = 100.0
+fill_mode = 4
+texture_progress = ExtResource("26_d0jji")
+tint_progress = Color(1, 0.13999999, 0.13999999, 0.5764706)
 
 [node name="Sprite2D" type="Sprite2D" parent="Ranger"]
 texture_filter = 1

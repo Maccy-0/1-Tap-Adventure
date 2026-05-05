@@ -14,10 +14,14 @@ var player
 var detection_range = 400.0
 var bullet_scene = preload("res://Assets/bullet.tscn")
 
+var progress_bar: TextureProgressBar
+var cool_down = 3
+
 func _ready():
 	add_to_group("enemies")
 	$HealthBar.max_value = max_health
-	
+	progress_bar = $Control/TextureProgressBar
+	progress_bar.max_value = cool_down
 	player = get_tree().get_first_node_in_group("player")
 
 func take_damage(amount):
@@ -52,8 +56,11 @@ func _physics_process(delta):
 		look_at(player.global_position)
 		
 		timer += delta
-		if timer > 3:
+		progress_bar.value = timer
+		
+		if timer > cool_down:
 			fire()
+			progress_bar.value = 0
 			timer = 0
 	else:
 		enemies_in_range = null
