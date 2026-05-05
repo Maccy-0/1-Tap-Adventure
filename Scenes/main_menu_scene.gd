@@ -4,6 +4,7 @@ var heldDown = false
 var heldTime = 0.0
 var confDuration = 1.0
 var pressTime = 0.0
+var progressBar: TextureProgressBar
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -20,6 +21,7 @@ func _input(event):
 			heldTime = 0.0
 			pressTime = 0.0
 			heldDown = false
+			resetProgress()
 			var a = InputEventAction.new()
 			a.action = "ui_focus_next"
 			a.pressed = true
@@ -38,6 +40,25 @@ func _process(delta: float) -> void:
 			a.action = "ui_accept"
 			a.pressed = true
 			Input.parse_input_event(a)
+	if heldTime > 0.2:
+		var currentBar = get_viewport().gui_get_focus_owner()
+		if currentBar == null: pass
+		else: 
+			var first_child = currentBar.get_child(0)
+			if first_child.is_class("TextureProgressBar"):
+				var currentProgress = heldTime - pressTime
+				first_child.value = currentProgress * 100
+				print_debug(first_child.value)
+
+
+func resetProgress():
+	var currentBar = get_viewport().gui_get_focus_owner()
+	if currentBar == null: pass
+	else: 
+		var first_child = currentBar.get_child(0)
+		if first_child.is_class("TextureProgressBar"):
+			first_child.value = 0.0
+
 
 func _on_tutorial_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/MainScene.tscn")
