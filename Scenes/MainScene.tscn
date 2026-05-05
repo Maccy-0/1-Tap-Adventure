@@ -1,4 +1,4 @@
-[gd_scene load_steps=24 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=36 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
@@ -10,15 +10,27 @@
 [ext_resource type="Texture2D" uid="uid://88nip11epjvk" path="res://Sprites/Circle-export.png" id="6_q68mp"]
 [ext_resource type="Texture2D" uid="uid://dic24a1v85qvu" path="res://Assets/Red Pirate Enemy.png" id="8_f140w"]
 [ext_resource type="Script" uid="uid://dqxd4td6bferm" path="res://Scenes/camera_2d.gd" id="8_i0j58"]
+[ext_resource type="AudioStream" uid="uid://b3n5x7y4v65d5" path="res://Sounds/kegpotiondrink.ogg" id="9_c1ier"]
 [ext_resource type="Script" uid="uid://dq4w0ntqhmlvm" path="res://Scenes/health_barrel.gd" id="10_4b75m"]
+[ext_resource type="AudioStream" uid="uid://cyjtli6iqx7no" path="res://Sounds/1tapadventurelosscreen.wav" id="10_p5ymy"]
+[ext_resource type="AudioStream" uid="uid://bmqgwoep40j4r" path="res://Sounds/spawn.wav" id="11_3va76"]
 [ext_resource type="Texture2D" uid="uid://blc3hsl8esn4u" path="res://Assets/Blue Pirate Enemy.png" id="11_8ju71"]
 [ext_resource type="Script" uid="uid://cbpfifj1pcpms" path="res://Scenes/ranger.gd" id="11_xb4mg"]
+[ext_resource type="AudioStream" uid="uid://bds24q1ht4x12" path="res://Sounds/playerhit.wav" id="12_wmecs"]
 [ext_resource type="Texture2D" uid="uid://bluwc0x5m8l8y" path="res://Assets/Flintlock.png" id="13_5qxwa"]
 [ext_resource type="Script" uid="uid://bqwdo3h11onfn" path="res://Scenes/health_bar.gd" id="13_6t1o7"]
+[ext_resource type="AudioStream" uid="uid://cwnyi1girwe0d" path="res://Sounds/pirate game main song.ogg" id="13_mymud"]
+[ext_resource type="AudioStream" uid="uid://bnaqnvotlf3vq" path="res://Sounds/hit2.mp3" id="15_r0vnq"]
 [ext_resource type="PackedScene" uid="uid://d36txlgpwx75l" path="res://Assets/bullet.tscn" id="15_xc4hf"]
 [ext_resource type="Script" uid="uid://c8bmxasecdyk6" path="res://Scenes/blunder.gd" id="16_6rnll"]
+[ext_resource type="AudioStream" uid="uid://cafjjivndb374" path="res://Sounds/Waves.mp3" id="16_c3pre"]
 [ext_resource type="Texture2D" uid="uid://dchv2apoynxbw" path="res://Assets/Blunderbuss.png" id="17_enc0b"]
+[ext_resource type="AudioStream" uid="uid://ddaftmek01hri" path="res://Sounds/swordslash-001.ogg" id="17_s1acj"]
+[ext_resource type="AudioStream" uid="uid://drmebktt0ctct" path="res://Sounds/flintlock.mp3" id="18_bpy1e"]
 [ext_resource type="Script" uid="uid://crkct5djaq86t" path="res://Scenes/enemy_counter.gd" id="18_hx8n4"]
+[ext_resource type="AudioStream" uid="uid://u3jtq5tbeyv1" path="res://Sounds/swordslash-002.ogg" id="18_t8ijv"]
+[ext_resource type="AudioStream" uid="uid://8biykex6nlsc" path="res://Sounds/Blunderbuss.mp3" id="20_gyaec"]
+[ext_resource type="AudioStream" uid="uid://b65lr5xb2npgp" path="res://Sounds/hit1.mp3" id="23_4sso6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6t1o7"]
 radius = 14.0
@@ -81,6 +93,43 @@ limit_right = 2000
 limit_bottom = 1000
 position_smoothing_enabled = true
 script = ExtResource("8_i0j58")
+
+[node name="Keg Drink" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("9_c1ier")
+volume_db = 2.889
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("10_p5ymy")
+volume_db = 12.301
+
+[node name="Enter" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("11_3va76")
+volume_db = 10.977
+
+[node name="IGotHit" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("12_wmecs")
+volume_db = 2.796
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("13_mymud")
+volume_db = 4.623
+
+[node name="Hit 1" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("23_4sso6")
+
+[node name="Hit 2" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("15_r0vnq")
+
+[node name="Wave" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("16_c3pre")
+volume_db = -2.543
+autoplay = true
+
+[node name="Sword1" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("17_s1acj")
+
+[node name="Sword2" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("18_t8ijv")
 
 [node name="EnemySpawner" type="Node2D" parent="."]
 
@@ -173,6 +222,10 @@ position = Vector2(1, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ranger/rangeArea2D"]
 shape = SubResource("CircleShape2D_xb4mg")
 
+[node name="Gun" type="AudioStreamPlayer2D" parent="Ranger"]
+stream = ExtResource("18_bpy1e")
+volume_db = 2.889
+
 [node name="Blunder" type="Node2D" parent="."]
 position = Vector2(1034, 465)
 script = ExtResource("16_6rnll")
@@ -211,6 +264,10 @@ position = Vector2(1, 0)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blunder/rangeArea2D"]
 shape = SubResource("CircleShape2D_xb4mg")
 
+[node name="BlunderGun" type="AudioStreamPlayer2D" parent="Blunder"]
+stream = ExtResource("20_gyaec")
+volume_db = 2.889
+
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Enemy Counter" type="Label" parent="CanvasLayer"]
@@ -227,6 +284,8 @@ theme_override_font_sizes/font_size = 48
 text = "Enemies left: 999"
 horizontal_alignment = 1
 script = ExtResource("18_hx8n4")
+
+[node name="AudioListener2D" type="AudioListener2D" parent="."]
 
 [connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]

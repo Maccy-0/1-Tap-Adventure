@@ -78,6 +78,7 @@ func fire():
 		get_parent().add_child(bullet)
 	
 	print("Spread Fire")
+	$BlunderGun.play()
 
 func update_health_bar():
 	var bar = $HealthBar

@@ -30,6 +30,8 @@ var facing_angle = 0.0
 
 var inputState = 0
 var trueTimer = 0
+var rng = RandomNumberGenerator.new()
+var wavetimer = 0
 
 func _ready():
 	add_to_group("player")
@@ -37,6 +39,9 @@ func _ready():
 	sword_start_pos = sword.position
 	sword_start_rot = sword.rotation
 	inputState = 0
+	
+	$Enter.play()
+	$Music.play()
 
 func _input(event):
 	
@@ -55,7 +60,6 @@ func _input(event):
 			inputState = 0
 
 func _process(delta: float) -> void:
-	print(inputState)
 	if inputState == 0:
 		rotation += spin_speed * spin_dir * delta
 	if inputState == 1:
@@ -88,7 +92,8 @@ func _process(delta: float) -> void:
 	else:
 		velocity /= 1.02
 		spinning = true
-			
+		
+		
 func _physics_process(delta):
 	position += velocity * delta
 	
@@ -148,6 +153,18 @@ func try_attack():
 func perform_attack(target):
 	animate_sword_attack()
 	
+	var my_random_number = rng.randf_range(-10, 10)
+	if my_random_number> 0:
+		$Sword1.play()
+	else:
+		$Sword2.play()
+	
+	my_random_number = rng.randf_range(-10, 10)
+	if my_random_number> 0:
+		$"Hit 1".play()
+	else:
+		$"Hit 2".play()
+	
 	await get_tree().create_timer(0.1).timeout
 	
 	if is_instance_valid(target):
@@ -169,6 +186,7 @@ func take_damage(amount):
 	health -= amount
 	health = max(health, 0)
 	print("Player health:", health)
+	$IGotHit.play()
 	
 	if health <= 0:
 		die()
@@ -177,9 +195,12 @@ func heal(amount):
 	health += amount
 	health = min(health, max_health)
 	print("Player healed:", health)
+	$"Keg Drink".play()
 	
 func die():
 	print("Player died")
+	$Music.stop()
+	$Death.play()
 	set_process(false)
 	set_physics_process(false)
 	
@@ -194,4 +215,4 @@ func flicker_and_reload():
 	
 	await get_tree().create_timer(1.0).timeout
 	
-	get_tree().reload_current_scene()
+	get_tree().reload_current_scene() #???
