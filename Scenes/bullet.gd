@@ -23,7 +23,7 @@ func _on_body_entered(body):
 	var player = get_player_root(body)
 	
 	if player:
-		player.take_damage(1)
+		player.take_damage(9)
 		queue_free()
 
 func _on_visible_on_screen_enabler_2d_screen_exited() -> void:

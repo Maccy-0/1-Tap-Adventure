@@ -3,7 +3,7 @@ extends Node2D
 var max_health = 20   # double the dummy
 var health = 20
 
-var heal_amount = 5   # how much it heals player
+var heal_amount = 45   # how much it heals player
 
 var hit_flash_time = 0.1
 var normal_color = Color(1,1,1)

@@ -1,4 +1,4 @@
-extends Node2D
+extends CharacterBody2D
 
 const HOLD_THRESHOLD = 0.2
 const DOUBLE_TAP_TIME = 0.3
@@ -10,15 +10,14 @@ var spin_dir = 1
 var facing_direction = Vector2.UP.rotated(rotation)
 
 var speed = 200.0
-var velocity = Vector2.ZERO
 var spinning = true
 var backing = false
 var backtimer = 0
 
 var enemies_in_range = []
 
-var max_health = 100
-var health = 100
+var max_health = 10
+var health = 10
 
 var attack_cooldown = 2.0
 var attack_timer = 0.0
@@ -41,7 +40,7 @@ func _ready():
 	sword_start_rot = sword.rotation
 	inputState = 0
 	dead = false
-	health = 100
+	health = 10
 	$"../CanvasLayer/ProgressBar".value = health
 	
 	$Enter.play()
@@ -105,6 +104,9 @@ func _physics_process(delta):
 	if attack_timer <= 0:
 		attack_timer = attack_cooldown
 		try_attack()
+	
+	position.x = clamp(position.x, -3000 + 350, 3000 - 400)
+	position.y = clamp(position.y, -2500 + 400, 2500 - 400)
 
 func get_enemy_root(node):
 	while node != null:
