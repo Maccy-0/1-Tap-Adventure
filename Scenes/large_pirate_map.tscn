@@ -215,7 +215,6 @@ offset_left = 425.0
 offset_top = 584.0
 offset_right = 725.0
 offset_bottom = 638.0
-max_value = 10.0
 
 [node name="Dummys" type="Node2D" parent="."]
 position = Vector2(1034, 160)
