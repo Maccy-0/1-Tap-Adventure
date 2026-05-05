@@ -1,6 +1,5 @@
-[gd_scene load_steps=41 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=39 format=3 uid="uid://dx18gfjy68noj"]
 
-[ext_resource type="Script" uid="uid://bpqd5v5pfqh8p" path="res://Scenes/better_player.gd" id="1_dtg5n"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://bnarmqxd6e5fd" path="res://Assets/Pirate Playable Character.png" id="3_0iob3"]
 [ext_resource type="Script" uid="uid://cjtghhto426ti" path="res://Scenes/player_sprite.gd" id="3_nhkr4"]
@@ -35,8 +34,6 @@
 [ext_resource type="Texture2D" uid="uid://bb5be7x1qevyr" path="res://Assets/Barrel Healing.png" id="22_dtg5n"]
 [ext_resource type="AudioStream" uid="uid://b65lr5xb2npgp" path="res://Sounds/hit1.mp3" id="23_4sso6"]
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_d0jji"]
-
 [sub_resource type="CircleShape2D" id="CircleShape2D_6t1o7"]
 radius = 14.0
 
@@ -53,98 +50,6 @@ radius = 278.01617
 size = Vector2(300.3333, 20)
 
 [node name="Node2D" type="Node2D"]
-
-[node name="BetterPlayer" type="CharacterBody2D" parent="."]
-visible = false
-position = Vector2(650, 319)
-script = ExtResource("1_dtg5n")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BetterPlayer"]
-shape = SubResource("CircleShape2D_d0jji")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="BetterPlayer"]
-remote_path = NodePath("PlayerSprite")
-
-[node name="PlayerSprite" type="Sprite2D" parent="BetterPlayer/RemoteTransform2D"]
-texture_filter = 1
-scale = Vector2(3, 3)
-texture = ExtResource("3_0iob3")
-script = ExtResource("3_nhkr4")
-
-[node name="SwordSprite" type="Sprite2D" parent="BetterPlayer/RemoteTransform2D/PlayerSprite"]
-texture_filter = 1
-position = Vector2(12.666664, -8)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("4_qxria")
-offset = Vector2(0, -20)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="BetterPlayer/RemoteTransform2D/PlayerSprite"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BetterPlayer/RemoteTransform2D/PlayerSprite/StaticBody2D"]
-shape = SubResource("CircleShape2D_6t1o7")
-
-[node name="Arrow" type="Sprite2D" parent="BetterPlayer"]
-texture_filter = 1
-position = Vector2(150, 0)
-rotation = 1.5707964
-scale = Vector2(2, 2)
-texture = ExtResource("5_rv6c1")
-
-[node name="Area2D" type="Area2D" parent="BetterPlayer"]
-script = ExtResource("5_q68mp")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="BetterPlayer/Area2D"]
-shape = SubResource("CircleShape2D_qxria")
-
-[node name="Sprite2D" type="Sprite2D" parent="BetterPlayer/Area2D/CollisionShape2D"]
-texture_filter = 1
-scale = Vector2(3.3, 3.3)
-texture = ExtResource("7_rv6c1")
-
-[node name="Camera2D" type="Camera2D" parent="BetterPlayer"]
-limit_left = -2000
-limit_top = -1000
-limit_right = 2000
-limit_bottom = 1000
-position_smoothing_enabled = true
-script = ExtResource("8_i0j58")
-
-[node name="Keg Drink" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("9_c1ier")
-volume_db = 2.889
-
-[node name="Death" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("10_p5ymy")
-volume_db = 12.301
-
-[node name="Enter" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("11_3va76")
-volume_db = 10.977
-
-[node name="IGotHit" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("12_wmecs")
-volume_db = 2.796
-
-[node name="Music" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("13_mymud")
-volume_db = 4.623
-
-[node name="Hit 1" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("23_4sso6")
-
-[node name="Hit 2" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("15_r0vnq")
-
-[node name="Wave" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("16_c3pre")
-volume_db = -2.543
-autoplay = true
-
-[node name="Sword1" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("17_s1acj")
-
-[node name="Sword2" type="AudioStreamPlayer2D" parent="BetterPlayer"]
-stream = ExtResource("18_t8ijv")
 
 [node name="Player" type="Node2D" parent="."]
 position = Vector2(650, 319)

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="1-Tap-Adventure"
-run/main_scene="uid://dx18gfjy68noj"
+run/main_scene="uid://bitbr4opgixwn"
 config/features=PackedStringArray("4.5", "Mobile")
 config/icon="res://icon.svg"
 
@@ -41,4 +41,5 @@ action={
 
 [rendering]
 
-renderer/rendering_method="mobile"
+renderer/rendering_method="gl_compatibility"
+renderer/rendering_method.mobile="gl_compatibility"
