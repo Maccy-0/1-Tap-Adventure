@@ -4,8 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://c4pf3gvx7wmlj" path="res://Todd_Assets/BasicTextures/1Artboard 1-20.jpg" id="1_sb72h"]
 [ext_resource type="Texture2D" uid="uid://q3huqfy3h5jp" path="res://Todd_Assets/BasicTextures/circle.png" id="3_mxhvt"]
 [ext_resource type="Texture2D" uid="uid://cgek01mmsxr0n" path="res://Todd_Assets/BasicTextures/1Artboard 1blank2.png" id="4_gmxq7"]
-[ext_resource type="Texture2D" uid="uid://dv1ve5s3brjot" path="res://Todd_Assets/BasicTextures/1Artboard 1newbar2.png" id="5_6xh72"]
-[ext_resource type="Texture2D" uid="uid://b7yxg8gxur2aa" path="res://Todd_Assets/BasicTextures/1Artboard 1newbar.png" id="6_06svm"]
+[ext_resource type="Texture2D" uid="uid://7i3riur6ynha" path="res://Todd_Assets/BasicTextures/1Artboard 1newbar4.png" id="5_06svm"]
+[ext_resource type="Texture2D" uid="uid://bwsj1v6fjd3h3" path="res://Todd_Assets/BasicTextures/1Artboard 1newbar3.png" id="6_12npo"]
 [ext_resource type="Texture2D" uid="uid://dolop57ev3ex3" path="res://Todd_Assets/BasicTextures/1Artboard 1scale2.png" id="7_12npo"]
 [ext_resource type="AudioStream" uid="uid://83y78ls5qc8n" path="res://Sounds/1tapadventuremainmenu.mp3" id="8_06svm"]
 
@@ -197,18 +197,18 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -418.0
+offset_left = -347.0
 offset_top = -43.5
-offset_right = 418.0
+offset_right = 347.0
 offset_bottom = 43.5
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.8, 0.8)
-pivot_offset = Vector2(418, 43.5)
+pivot_offset = Vector2(347, 43.5)
 max_value = 10.0
 value = 10.0
-texture_under = ExtResource("5_6xh72")
-texture_progress = ExtResource("6_06svm")
+texture_under = ExtResource("5_06svm")
+texture_progress = ExtResource("6_12npo")
 
 [node name="TextureRect" type="TextureRect" parent="SettingsMenu/Control"]
 layout_mode = 1
@@ -217,9 +217,9 @@ anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -413.0
+offset_left = -414.0
 offset_top = -82.5
-offset_right = 422.99988
+offset_right = 417.57135
 offset_bottom = 4.5
 grow_horizontal = 2
 grow_vertical = 2

@@ -45,8 +45,6 @@ func _input(event):
 				pressTime = Time.get_ticks_msec() / 1000.0
 		if event is InputEventKey and event.is_released():
 			if event.is_action_released("action") && heldDown == true:
-				var volumeBar = $SettingsMenu/Control/TextureProgressBar
-				volumeBar.value = Global.masterVolume
 				progressBar = $SettingsMenu/UXControl/TextureProgressBar
 				heldTime = 0.0
 				progressBar.value = heldTime
@@ -111,6 +109,8 @@ func resetProgress():
 			
 
 func setVolume():
+	var volumeBar = $SettingsMenu/Control/TextureProgressBar
+	volumeBar.value = Global.masterVolume
 	var master_bus_index = AudioServer.get_bus_index("Master")
 	AudioServer.set_bus_volume_db(master_bus_index, linear_to_db(Global.masterVolume * .1))
 	print_debug(Global.masterVolume * .1)
