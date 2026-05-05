@@ -7,14 +7,15 @@ var pressTime = 0.0
 var progressBar: TextureProgressBar
 var settingsMenu
 #Change to global
-var volumeSetting = 0
 var volumeBar: TextureProgressBar
+var aPlayer: AudioStreamPlayer2D
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	$VBoxContainer/Tutorial.grab_focus.call_deferred()
 	settingsMenu = $SettingsMenu
 	volumeBar = $SettingsMenu/Control/TextureProgressBar
+	setVolume()
 	settingsMenu.visible = false
 	Global.mainMenu = 0
 
@@ -44,16 +45,18 @@ func _input(event):
 				pressTime = Time.get_ticks_msec() / 1000.0
 		if event is InputEventKey and event.is_released():
 			if event.is_action_released("action") && heldDown == true:
+				var volumeBar = $SettingsMenu/Control/TextureProgressBar
+				volumeBar.value = Global.masterVolume
 				progressBar = $SettingsMenu/UXControl/TextureProgressBar
-				progressBar.value = 0.0
 				heldTime = 0.0
+				progressBar.value = heldTime
 				pressTime = 0.0
 				heldDown = false
-				if volumeSetting < 10: 
-					volumeSetting += 1
-				else: if volumeSetting >= 10:
-					volumeSetting = 0
-				volumeBar.value = volumeSetting
+				if Global.masterVolume < 10.0: 
+					Global.masterVolume += 1.0
+				else: if Global.masterVolume >= 10.0:
+					Global.masterVolume = 0.0
+				setVolume()
 
 
 func _process(delta: float) -> void:
@@ -105,7 +108,12 @@ func resetProgress():
 		var first_child = currentBar.get_child(0)
 		if first_child.is_class("TextureProgressBar"):
 			first_child.value = 0.0
+			
 
+func setVolume():
+	var master_bus_index = AudioServer.get_bus_index("Master")
+	AudioServer.set_bus_volume_db(master_bus_index, linear_to_db(Global.masterVolume * .1))
+	print_debug(Global.masterVolume * .1)
 
 func _on_tutorial_pressed() -> void:
 	get_tree().change_scene_to_file("res://Scenes/MainScene.tscn")
@@ -120,6 +128,8 @@ func _on_settings_pressed() -> void:
 	heldTime = 0.0
 	Global.mainMenu = 2
 	settingsMenu.visible = true;
+	progressBar = $SettingsMenu/Control/TextureProgressBar
+	progressBar.value = Global.masterVolume
 
 
 func _on_credits_pressed() -> void:
