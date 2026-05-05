@@ -67,6 +67,14 @@ func fire():
 	get_parent().add_child(bullet)
 	print("Fire")
 	$Gun.play()
+	
+	var new_texture1 = load("res://Assets/Flintlock fired.png")
+	$Sprite2D/Gunny.texture = new_texture1
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	var new_texture2 = load("res://Assets/Flintlock.png")
+	$Sprite2D/Gunny.texture = new_texture2
 
 func update_health_bar():
 	var bar = $HealthBar

@@ -1,4 +1,4 @@
-[gd_scene load_steps=36 format=3 uid="uid://dx18gfjy68noj"]
+[gd_scene load_steps=38 format=3 uid="uid://dx18gfjy68noj"]
 
 [ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
@@ -30,6 +30,8 @@
 [ext_resource type="Script" uid="uid://crkct5djaq86t" path="res://Scenes/enemy_counter.gd" id="18_hx8n4"]
 [ext_resource type="AudioStream" uid="uid://u3jtq5tbeyv1" path="res://Sounds/swordslash-002.ogg" id="18_t8ijv"]
 [ext_resource type="AudioStream" uid="uid://8biykex6nlsc" path="res://Sounds/Blunderbuss.mp3" id="20_gyaec"]
+[ext_resource type="Texture2D" uid="uid://b6spu40qh6cbo" path="res://Assets/Barrel Normal.png" id="20_rv6c1"]
+[ext_resource type="Texture2D" uid="uid://bb5be7x1qevyr" path="res://Assets/Barrel Healing.png" id="22_dtg5n"]
 [ext_resource type="AudioStream" uid="uid://b65lr5xb2npgp" path="res://Sounds/hit1.mp3" id="23_4sso6"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_6t1o7"]
@@ -141,7 +143,7 @@ script = ExtResource("4_7rqgy")
 texture_filter = 1
 position = Vector2(1, 0)
 scale = Vector2(3, 3)
-texture = ExtResource("8_f140w")
+texture = ExtResource("20_rv6c1")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="Dummy/Sprite2D"]
 
@@ -151,6 +153,7 @@ shape = SubResource("RectangleShape2D_qxria")
 
 [node name="HealthBar" type="ProgressBar" parent="Dummy"]
 visible = false
+modulate = Color(1, 0, 0, 1)
 offset_left = -31.0
 offset_top = -43.0
 offset_right = 33.0
@@ -165,7 +168,7 @@ script = ExtResource("10_4b75m")
 texture_filter = 1
 position = Vector2(-1, 0)
 scale = Vector2(3, 3)
-texture = ExtResource("3_0iob3")
+texture = ExtResource("22_dtg5n")
 
 [node name="StaticBody2D" type="StaticBody2D" parent="HealthBarrel/Sprite2D"]
 
@@ -175,6 +178,7 @@ shape = SubResource("RectangleShape2D_qxria")
 
 [node name="HealthBar" type="ProgressBar" parent="HealthBarrel"]
 visible = false
+modulate = Color(1, 0, 0, 1)
 offset_left = -33.0
 offset_top = -43.0
 offset_right = 31.0
@@ -202,13 +206,14 @@ texture = ExtResource("11_8ju71")
 scale = Vector2(0.16, 0.16)
 shape = SubResource("RectangleShape2D_qxria")
 
-[node name="Sprite2D" type="Sprite2D" parent="Ranger/Sprite2D"]
+[node name="Gunny" type="Sprite2D" parent="Ranger/Sprite2D"]
 texture_filter = 1
 position = Vector2(7.9999995, -12.333334)
 texture = ExtResource("13_5qxwa")
 
 [node name="HealthBar" type="ProgressBar" parent="Ranger"]
 visible = false
+modulate = Color(1, 0, 0, 1)
 offset_left = -31.0
 offset_top = -43.0
 offset_right = 33.0
@@ -251,6 +256,7 @@ texture = ExtResource("17_enc0b")
 
 [node name="HealthBar" type="ProgressBar" parent="Blunder"]
 visible = false
+modulate = Color(1, 0, 0, 1)
 offset_left = -31.0
 offset_top = -43.0
 offset_right = 33.0

@@ -79,6 +79,14 @@ func fire():
 	
 	print("Spread Fire")
 	$BlunderGun.play()
+	
+	var new_texture1 = load("res://Assets/Blunderbuss fired.png")
+	$Sprite2D/Sprite2D.texture = new_texture1
+	
+	await get_tree().create_timer(0.1).timeout
+	
+	var new_texture2 = load("res://Assets/Blunderbuss.png")
+	$Sprite2D/Sprite2D.texture = new_texture2
 
 func update_health_bar():
 	var bar = $HealthBar
