@@ -32,9 +32,7 @@ func _process(delta: float) -> void:
 	if heldDown == true:
 		heldTime = Time.get_ticks_msec() / 1000.0 
 		var compare = heldTime - pressTime
-		print_debug(compare)
 		if compare >= confDuration:
-			print_debug("Held Time Finished")
 			heldDown = false
 			var a = InputEventAction.new()
 			a.action = "ui_accept"
@@ -48,7 +46,6 @@ func _process(delta: float) -> void:
 			if first_child.is_class("TextureProgressBar"):
 				var currentProgress = heldTime - pressTime
 				first_child.value = currentProgress * 100
-				print_debug(first_child.value)
 
 
 func resetProgress():
