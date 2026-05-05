@@ -1,13 +1,13 @@
 [gd_scene load_steps=38 format=3 uid="uid://dx18gfjy68noj"]
 
-[ext_resource type="Texture2D" uid="uid://b2h7vtkbv4eks" path="res://icon.svg" id="1_hpc76"]
 [ext_resource type="Script" uid="uid://cokplsqjmsxud" path="res://Scenes/player.gd" id="2_tr2i4"]
 [ext_resource type="Texture2D" uid="uid://bnarmqxd6e5fd" path="res://Assets/Pirate Playable Character.png" id="3_0iob3"]
 [ext_resource type="Script" uid="uid://cjtghhto426ti" path="res://Scenes/player_sprite.gd" id="3_nhkr4"]
 [ext_resource type="Script" uid="uid://c3pshbe8jc33g" path="res://Scenes/dummy.gd" id="4_7rqgy"]
 [ext_resource type="Texture2D" uid="uid://m4ygito7gm0d" path="res://Assets/Sword Sprite.png" id="4_qxria"]
 [ext_resource type="Script" uid="uid://cv66gc2qyorml" path="res://Scenes/area_2d.gd" id="5_q68mp"]
-[ext_resource type="Texture2D" uid="uid://88nip11epjvk" path="res://Sprites/Circle-export.png" id="6_q68mp"]
+[ext_resource type="Texture2D" uid="uid://c0aqq886yq7g4" path="res://Assets/Arrow.png" id="5_rv6c1"]
+[ext_resource type="Texture2D" uid="uid://b5auy1e60bjqd" path="res://Assets/circle around player.png" id="7_rv6c1"]
 [ext_resource type="Texture2D" uid="uid://dic24a1v85qvu" path="res://Assets/Red Pirate Enemy.png" id="8_f140w"]
 [ext_resource type="Script" uid="uid://dqxd4td6bferm" path="res://Scenes/camera_2d.gd" id="8_i0j58"]
 [ext_resource type="AudioStream" uid="uid://b3n5x7y4v65d5" path="res://Sounds/kegpotiondrink.ogg" id="9_c1ier"]
@@ -74,9 +74,11 @@ offset = Vector2(0, -20)
 shape = SubResource("CircleShape2D_6t1o7")
 
 [node name="Arrow" type="Sprite2D" parent="Player"]
-scale = Vector2(0.75, 0.1)
-texture = ExtResource("1_hpc76")
-offset = Vector2(150, 0)
+texture_filter = 1
+position = Vector2(150, 0)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+texture = ExtResource("5_rv6c1")
 
 [node name="Area2D" type="Area2D" parent="Player"]
 script = ExtResource("5_q68mp")
@@ -85,8 +87,9 @@ script = ExtResource("5_q68mp")
 shape = SubResource("CircleShape2D_qxria")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player/Area2D/CollisionShape2D"]
-scale = Vector2(0.075, 0.075)
-texture = ExtResource("6_q68mp")
+texture_filter = 1
+scale = Vector2(3.3, 3.3)
+texture = ExtResource("7_rv6c1")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 limit_left = -2000
@@ -290,6 +293,14 @@ theme_override_font_sizes/font_size = 48
 text = "Enemies left: 999"
 horizontal_alignment = 1
 script = ExtResource("18_hx8n4")
+
+[node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
+modulate = Color(1, 0, 0, 1)
+offset_left = 425.0
+offset_top = 584.0
+offset_right = 725.0
+offset_bottom = 638.0
+max_value = 10.0
 
 [node name="AudioListener2D" type="AudioListener2D" parent="."]
 

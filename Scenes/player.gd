@@ -32,6 +32,7 @@ var inputState = 0
 var trueTimer = 0
 var rng = RandomNumberGenerator.new()
 var wavetimer = 0
+var dead = false
 
 func _ready():
 	add_to_group("player")
@@ -39,6 +40,9 @@ func _ready():
 	sword_start_pos = sword.position
 	sword_start_rot = sword.rotation
 	inputState = 0
+	dead = false
+	health = 10
+	$"../CanvasLayer/ProgressBar".value = health
 	
 	$Enter.play()
 	$Music.play()
@@ -183,18 +187,22 @@ func animate_sword_attack():
 	tween.parallel().tween_property(sword, "rotation", sword_start_rot, 0.05)
 
 func take_damage(amount):
-	health -= amount
-	health = max(health, 0)
-	print("Player health:", health)
-	$IGotHit.play()
+	if dead == false: 
+		health -= amount
+		health = max(health, 0)
+		print("Player health:", health)
+		$"../CanvasLayer/ProgressBar".value = health
+		$IGotHit.play()
 	
-	if health <= 0:
-		die()
+		if health <= 0:
+			dead = true
+			die()
 
 func heal(amount):
 	health += amount
 	health = min(health, max_health)
 	print("Player healed:", health)
+	$"../CanvasLayer/ProgressBar".value = health
 	$"Keg Drink".play()
 	
 func die():
@@ -212,7 +220,9 @@ func flicker_and_reload():
 		await get_tree().create_timer(0.1).timeout
 		visible = true
 		await get_tree().create_timer(0.1).timeout
+		
+	visible = false
+	await get_tree().create_timer(6.0).timeout
 	
-	await get_tree().create_timer(1.0).timeout
 	
-	get_tree().reload_current_scene() #???
+	get_tree().change_scene_to_file("res://Scenes/MainMenuScene.tscn")
