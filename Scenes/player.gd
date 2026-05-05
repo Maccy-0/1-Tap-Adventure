@@ -172,8 +172,29 @@ func take_damage(amount):
 	health -= amount
 	health = max(health, 0)
 	print("Player health:", health)
+	
+	if health <= 0:
+		die()
 
 func heal(amount):
 	health += amount
 	health = min(health, max_health)
 	print("Player healed:", health)
+	
+func die():
+	print("Player died")
+	set_process(false)
+	set_physics_process(false)
+	
+	flicker_and_reload()
+
+func flicker_and_reload():
+	for i in range(10):
+		visible = false
+		await get_tree().create_timer(0.1).timeout
+		visible = true
+		await get_tree().create_timer(0.1).timeout
+	
+	await get_tree().create_timer(1.0).timeout
+	
+	get_tree().reload_current_scene()
