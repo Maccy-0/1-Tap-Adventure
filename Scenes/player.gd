@@ -45,9 +45,6 @@ func _input(event):
 			inputState = 1
 		if inputState == 3:
 			inputState = 5
-		
-		#press_time = Time.get_ticks_msec() / 1000.0
-		#Global.holding = true
 
 	if event.is_action_released("action"):
 		Global.holding = false
@@ -56,25 +53,6 @@ func _input(event):
 			trueTimer = 0
 		if inputState == 2:
 			inputState = 0
-		
-		#var now = Time.get_ticks_msec() / 1000.0
-		#var held_duration = now - press_time
-		#Global.holding = false
-
-		#if held_duration < HOLD_THRESHOLD:
-			# Tap
-			#if now - last_tap_time < DOUBLE_TAP_TIME:
-				#print("Back")
-			#	var direction = Vector2.RIGHT.rotated(rotation)
-			#	velocity = -direction * speed * 0.06
-			#	position += velocity
-			#	rotation += PI
-			#	backtimer = 0
-			#	backing = true
-			#else:
-				#print("other way")
-			#	spin_dir *= -1
-			#last_tap_time = now
 
 func _process(delta: float) -> void:
 	print(inputState)
@@ -101,39 +79,23 @@ func _process(delta: float) -> void:
 		position += velocity
 		rotation += PI
 		inputState = 2
-		
-		#$PlayerSprite.rotation = -rotation
-		#arrow.rotation = rotation
 	
-	if Global.holding: #if holding and state == SPINNING:
-		#if Time.get_ticks_msec() / 200.0 - press_time > HOLD_THRESHOLD:
-			#print("forward")
-			#spinning = false
+	if Global.holding:
 		var direction = Vector2.RIGHT.rotated(rotation)
 		velocity = direction * speed
 			
 		facing_angle = direction.angle()
 	else:
-		velocity = Vector2.ZERO
+		velocity /= 1.02
 		spinning = true
 			
 func _physics_process(delta):
-	#get_closest_enemy()
-	
 	position += velocity * delta
-	
-	#print(backtimer)
-	#if backing == true:
-	#	backtimer += delta
-	#	if backtimer > 0.2:
-	#		spinning = true
-	#		backing = false
 	
 	attack_timer -= delta
 	if attack_timer <= 0:
 		attack_timer = attack_cooldown
 		try_attack()
-		
 
 func get_enemy_root(node):
 	while node != null:
