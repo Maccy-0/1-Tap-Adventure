@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bitbr4opgixwn"]
+[gd_scene load_steps=11 format=3 uid="uid://bitbr4opgixwn"]
 
 [ext_resource type="Script" uid="uid://brya6tm7de21k" path="res://Scenes/main_menu_scene.gd" id="1_47sjk"]
 [ext_resource type="Texture2D" uid="uid://c4pf3gvx7wmlj" path="res://Todd_Assets/BasicTextures/1Artboard 1-20.jpg" id="1_sb72h"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://dv1ve5s3brjot" path="res://Todd_Assets/BasicTextures/1Artboard 1newbar2.png" id="5_6xh72"]
 [ext_resource type="Texture2D" uid="uid://b7yxg8gxur2aa" path="res://Todd_Assets/BasicTextures/1Artboard 1newbar.png" id="6_06svm"]
 [ext_resource type="Texture2D" uid="uid://dolop57ev3ex3" path="res://Todd_Assets/BasicTextures/1Artboard 1scale2.png" id="7_12npo"]
+[ext_resource type="AudioStream" uid="uid://83y78ls5qc8n" path="res://Sounds/1tapadventuremainmenu.mp3" id="8_06svm"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_47sjk"]
 texture = ExtResource("1_sb72h")
@@ -85,7 +86,7 @@ focus_next = NodePath("../Settings~")
 theme_override_font_sizes/font_size = 25
 action_mode = 0
 button_mask = 0
-text = "Endless"
+text = "Start"
 
 [node name="TextureProgressBar" type="TextureProgressBar" parent="VBoxContainer/Endless~"]
 layout_direction = 2
@@ -269,6 +270,9 @@ text = "One Tap Adventure"
 [node name="Node2D" type="Node2D" parent="."]
 
 [node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("8_06svm")
+volume_db = 12.15
+autoplay = true
 
 [connection signal="pressed" from="VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/Endless~" to="." method="_on_endless_pressed"]
