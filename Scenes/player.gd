@@ -14,7 +14,6 @@ var velocity = Vector2.ZERO
 var spinning = true
 var backing = false
 var backtimer = 0
-	
 
 var enemies_in_range = []
 
@@ -29,55 +28,91 @@ var sword_start_pos
 var sword_start_rot
 var facing_angle = 0.0
 
+var inputState = 0
+var trueTimer = 0
+
 func _ready():
 	add_to_group("player")
 	sword = $RemoteTransform2D/PlayerSprite/SwordSprite
 	sword_start_pos = sword.position
 	sword_start_rot = sword.rotation
+	inputState = 0
 
 func _input(event):
 	
 	if event.is_action_pressed("action"):
-		press_time = Time.get_ticks_msec() / 1000.0
-		Global.holding = true
+		if inputState == 0:
+			inputState = 1
+		if inputState == 3:
+			inputState = 5
+		
+		#press_time = Time.get_ticks_msec() / 1000.0
+		#Global.holding = true
 
 	if event.is_action_released("action"):
-		var now = Time.get_ticks_msec() / 1000.0
-		var held_duration = now - press_time
 		Global.holding = false
+		if inputState == 1:
+			inputState = 3
+			trueTimer = 0
+		if inputState == 2:
+			inputState = 0
+		
+		#var now = Time.get_ticks_msec() / 1000.0
+		#var held_duration = now - press_time
+		#Global.holding = false
 
-		if held_duration < HOLD_THRESHOLD:
+		#if held_duration < HOLD_THRESHOLD:
 			# Tap
-			if now - last_tap_time < DOUBLE_TAP_TIME:
+			#if now - last_tap_time < DOUBLE_TAP_TIME:
 				#print("Back")
-				var direction = Vector2.RIGHT.rotated(rotation)
-				velocity = -direction * speed * 0.06
-				position += velocity
-				rotation += PI
-				backtimer = 0
-				backing = true
-			else:
+			#	var direction = Vector2.RIGHT.rotated(rotation)
+			#	velocity = -direction * speed * 0.06
+			#	position += velocity
+			#	rotation += PI
+			#	backtimer = 0
+			#	backing = true
+			#else:
 				#print("other way")
-				spin_dir *= -1
-			last_tap_time = now
+			#	spin_dir *= -1
+			#last_tap_time = now
 
 func _process(delta: float) -> void:
-	#print(enemies_in_range)
-	
-	if spinning == true && backing == false:
+	print(inputState)
+	if inputState == 0:
 		rotation += spin_speed * spin_dir * delta
+	if inputState == 1:
+		trueTimer += delta
+		if trueTimer > 0.2:
+			trueTimer = 0
+			inputState = 2
+	if inputState == 2:
+		Global.holding = true
+	if inputState == 3:
+		trueTimer += delta
+		if trueTimer > 0.2:
+			trueTimer = 0
+			inputState = 4
+	if inputState == 4:
+		spin_dir *= -1
+		inputState = 0
+	if inputState == 5:
+		var direction = Vector2.RIGHT.rotated(rotation)
+		velocity = -direction * speed * 0.06
+		position += velocity
+		rotation += PI
+		inputState = 2
 		
 		#$PlayerSprite.rotation = -rotation
 		#arrow.rotation = rotation
 	
 	if Global.holding: #if holding and state == SPINNING:
-		if Time.get_ticks_msec() / 200.0 - press_time > HOLD_THRESHOLD:
+		#if Time.get_ticks_msec() / 200.0 - press_time > HOLD_THRESHOLD:
 			#print("forward")
-			spinning = false
-			var direction = Vector2.RIGHT.rotated(rotation)
-			velocity = direction * speed
+			#spinning = false
+		var direction = Vector2.RIGHT.rotated(rotation)
+		velocity = direction * speed
 			
-			facing_angle = direction.angle()
+		facing_angle = direction.angle()
 	else:
 		velocity = Vector2.ZERO
 		spinning = true
@@ -88,11 +123,11 @@ func _physics_process(delta):
 	position += velocity * delta
 	
 	#print(backtimer)
-	if backing == true:
-		backtimer += delta
-		if backtimer > 0.2:
-			spinning = true
-			backing = false
+	#if backing == true:
+	#	backtimer += delta
+	#	if backtimer > 0.2:
+	#		spinning = true
+	#		backing = false
 	
 	attack_timer -= delta
 	if attack_timer <= 0:
