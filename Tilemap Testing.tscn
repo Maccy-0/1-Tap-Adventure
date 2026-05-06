@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=4 uid="uid://dmr6sxsbx3rh0"]
+[gd_scene load_steps=6 format=4 uid="uid://bfwyumgs14vyd"]
 
 [ext_resource type="Texture2D" uid="uid://bpf4kphfmxekn" path="res://Assets/Ship Tile Map-Sheet.png" id="1_sio5g"]
 [ext_resource type="Texture2D" uid="uid://bfc6ydn65x1gn" path="res://Assets/Sand Tile Map-Sheet.png" id="2_bsfkh"]
