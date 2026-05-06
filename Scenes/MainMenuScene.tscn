@@ -26,16 +26,6 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_47sjk")
 
-[node name="Background" type="Panel" parent="."]
-self_modulate = Color(2.3102762e-06, 0.6394416, 0.8979573, 1)
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
-
 [node name="TextureRect" type="TextureRect" parent="."]
 self_modulate = Color(0.45372826, 0.45372826, 0.45372826, 1)
 layout_mode = 1
@@ -46,6 +36,19 @@ grow_horizontal = 2
 grow_vertical = 2
 texture = ExtResource("3_m73vm")
 metadata/_edit_use_anchors_ = true
+
+[node name="Background" type="Panel" parent="."]
+self_modulate = Color(0, 0.64500004, 0.9, 0.5803922)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -108.0
+offset_top = 81.0
+offset_right = 107.0
+offset_bottom = 122.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -264,19 +267,6 @@ allow_greater = true
 fill_mode = 4
 texture_progress = ExtResource("3_mxhvt")
 
-[node name="Background5" type="Panel" parent="."]
-self_modulate = Color(0.120000005, 0.7506667, 1, 0.50980395)
-layout_mode = 1
-anchors_preset = 5
-anchor_left = 0.5
-anchor_right = 0.5
-offset_left = -108.0
-offset_top = 81.0
-offset_right = 107.0
-offset_bottom = 123.0
-grow_horizontal = 2
-theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
-
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -371,29 +361,33 @@ texture_progress = ExtResource("3_mxhvt")
 [node name="Background3" type="Panel" parent="."]
 self_modulate = Color(0.120000005, 0.7506667, 1, 0.50980395)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 429.0
-offset_top = 567.0
-offset_right = -414.0
-offset_bottom = -34.0
+offset_left = -147.0
+offset_top = -141.0
+offset_right = 162.0
+offset_bottom = -94.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
 
-[node name="Background4" type="Panel" parent="."]
+[node name="Background6" type="Panel" parent="."]
 self_modulate = Color(0.120000005, 0.7506667, 1, 0.50980395)
 layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 429.0
-offset_top = 508.0
-offset_right = -414.0
-offset_bottom = -93.0
+offset_left = -147.0
+offset_top = -81.0
+offset_right = 162.0
+offset_bottom = -34.0
 grow_horizontal = 2
-grow_vertical = 2
+grow_vertical = 0
 theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
