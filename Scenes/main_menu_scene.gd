@@ -150,11 +150,11 @@ func setVolume():
 	print_debug(Global.masterVolume * .1)
 
 func _on_tutorial_pressed() -> void:
-	get_tree().change_scene_to_file("res://Scenes/MainScene.tscn")
+	get_tree().change_scene_to_file("res://TutorialScene.tscn")
 
 
 func _on_endless_pressed() -> void:
-	pass
+	get_tree().change_scene_to_file("res://Scenes/large_pirate_map.tscn")
 
 
 func _on_settings_pressed() -> void:
