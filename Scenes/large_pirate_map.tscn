@@ -187,14 +187,11 @@ stream = ExtResource("19_5qj2e")
 
 [node name="Enemy Counter" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.55200005
-anchor_top = -0.002
-anchor_right = 0.55200005
-anchor_bottom = -0.002
-offset_left = -261.90405
-offset_top = 1.296
-offset_right = 131.09595
-offset_bottom = 68.296
+anchor_left = 0.57000005
+anchor_right = 0.57000005
+offset_left = -194.64008
+offset_right = 198.35992
+offset_bottom = 67.0
 theme_override_font_sizes/font_size = 48
 text = "Enemies left: 999"
 horizontal_alignment = 1
@@ -214,10 +211,15 @@ horizontal_alignment = 1
 
 [node name="ProgressBar" type="ProgressBar" parent="CanvasLayer"]
 modulate = Color(1, 0, 0, 1)
-offset_left = 425.0
-offset_top = 584.0
-offset_right = 725.0
-offset_bottom = 638.0
+anchors_preset = -1
+anchor_left = 0.564
+anchor_top = 1.0
+anchor_right = 0.564
+anchor_bottom = 1.0
+offset_left = -151.72803
+offset_top = -64.0
+offset_right = 148.27197
+offset_bottom = -10.0
 
 [node name="Dummys" type="Node2D" parent="."]
 position = Vector2(1034, 160)
