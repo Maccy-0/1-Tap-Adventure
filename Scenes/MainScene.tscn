@@ -95,7 +95,6 @@ scale = Vector2(3.3, 3.3)
 texture = ExtResource("7_rv6c1")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-limit_enabled = false
 position_smoothing_enabled = true
 script = ExtResource("8_i0j58")
 

@@ -85,12 +85,6 @@ tile_size = Vector2i(32, 32)
 sources/2 = SubResource("TileSetAtlasSource_v8hr0")
 sources/3 = SubResource("TileSetAtlasSource_orm5a")
 
-[sub_resource type="CircleShape2D" id="CircleShape2D_pqjme"]
-radius = 14.0
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_si8km"]
-radius = 101.0
-
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pdthe"]
 size = Vector2(128, 128)
 
@@ -108,6 +102,12 @@ size = Vector2(128, 128)
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lduw1"]
 radius = 278.01617
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pqjme"]
+radius = 14.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_si8km"]
+radius = 101.0
 
 [node name="TutorialScene" type="Node2D"]
 
@@ -152,91 +152,6 @@ offset_left = 425.0
 offset_top = 584.0
 offset_right = 725.0
 offset_bottom = 638.0
-
-[node name="Player" type="Node2D" parent="."]
-position = Vector2(650, 319)
-script = ExtResource("2_qnfqb")
-
-[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
-remote_path = NodePath("PlayerSprite")
-
-[node name="PlayerSprite" type="Sprite2D" parent="Player/RemoteTransform2D"]
-texture_filter = 1
-scale = Vector2(3, 3)
-texture = ExtResource("3_ed3yy")
-script = ExtResource("4_y6tcj")
-
-[node name="SwordSprite" type="Sprite2D" parent="Player/RemoteTransform2D/PlayerSprite"]
-texture_filter = 1
-position = Vector2(12.666664, -8)
-scale = Vector2(0.33, 0.33)
-texture = ExtResource("5_1jua5")
-offset = Vector2(0, -20)
-
-[node name="StaticBody2D" type="StaticBody2D" parent="Player/RemoteTransform2D/PlayerSprite"]
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/RemoteTransform2D/PlayerSprite/StaticBody2D"]
-shape = SubResource("CircleShape2D_pqjme")
-
-[node name="Arrow" type="Sprite2D" parent="Player"]
-texture_filter = 1
-position = Vector2(150, 0)
-rotation = 1.5707964
-scale = Vector2(2, 2)
-texture = ExtResource("6_o1ynx")
-
-[node name="Area2D" type="Area2D" parent="Player"]
-script = ExtResource("7_8lbhc")
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
-shape = SubResource("CircleShape2D_si8km")
-
-[node name="Sprite2D" type="Sprite2D" parent="Player/Area2D/CollisionShape2D"]
-texture_filter = 1
-scale = Vector2(3.3, 3.3)
-texture = ExtResource("8_qahko")
-
-[node name="Camera2D" type="Camera2D" parent="Player"]
-limit_enabled = false
-position_smoothing_enabled = true
-script = ExtResource("9_p11tr")
-
-[node name="Keg Drink" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("10_a7ov1")
-volume_db = 2.889
-
-[node name="Death" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("11_iint3")
-volume_db = 12.301
-
-[node name="Enter" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("12_h7mt1")
-volume_db = 10.977
-
-[node name="IGotHit" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("13_52gnc")
-volume_db = 2.796
-
-[node name="Music" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("14_r74ab")
-volume_db = 4.623
-
-[node name="Hit 1" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("15_n0yie")
-
-[node name="Hit 2" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("16_o13s6")
-
-[node name="Wave" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("17_v8hr0")
-volume_db = -2.543
-autoplay = true
-
-[node name="Sword1" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("18_orm5a")
-
-[node name="Sword2" type="AudioStreamPlayer2D" parent="Player"]
-stream = ExtResource("19_pdthe")
 
 [node name="Tutorial Prompts" type="Node2D" parent="."]
 position = Vector2(673, 95)
@@ -423,10 +338,91 @@ shape = SubResource("CircleShape2D_lduw1")
 stream = ExtResource("43_ajy13")
 volume_db = 2.889
 
-[connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
-[connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
-[connection signal="body_shape_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_shape_entered"]
-[connection signal="body_shape_exited" from="Player/Area2D" to="Player" method="_on_area_2d_body_shape_exited"]
+[node name="Player" type="Node2D" parent="."]
+position = Vector2(650, 319)
+script = ExtResource("2_qnfqb")
+
+[node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
+remote_path = NodePath("PlayerSprite")
+
+[node name="PlayerSprite" type="Sprite2D" parent="Player/RemoteTransform2D"]
+texture_filter = 1
+scale = Vector2(3, 3)
+texture = ExtResource("3_ed3yy")
+script = ExtResource("4_y6tcj")
+
+[node name="SwordSprite" type="Sprite2D" parent="Player/RemoteTransform2D/PlayerSprite"]
+texture_filter = 1
+position = Vector2(12.666664, -8)
+scale = Vector2(0.33, 0.33)
+texture = ExtResource("5_1jua5")
+offset = Vector2(0, -20)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Player/RemoteTransform2D/PlayerSprite"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/RemoteTransform2D/PlayerSprite/StaticBody2D"]
+shape = SubResource("CircleShape2D_pqjme")
+
+[node name="Arrow" type="Sprite2D" parent="Player"]
+texture_filter = 1
+position = Vector2(150, 0)
+rotation = 1.5707964
+scale = Vector2(2, 2)
+texture = ExtResource("6_o1ynx")
+
+[node name="Area2D" type="Area2D" parent="Player"]
+script = ExtResource("7_8lbhc")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Player/Area2D"]
+shape = SubResource("CircleShape2D_si8km")
+
+[node name="Sprite2D" type="Sprite2D" parent="Player/Area2D/CollisionShape2D"]
+texture_filter = 1
+scale = Vector2(3.3, 3.3)
+texture = ExtResource("8_qahko")
+
+[node name="Camera2D" type="Camera2D" parent="Player"]
+limit_enabled = false
+position_smoothing_enabled = true
+script = ExtResource("9_p11tr")
+
+[node name="Keg Drink" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("10_a7ov1")
+volume_db = 2.889
+
+[node name="Death" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("11_iint3")
+volume_db = 12.301
+
+[node name="Enter" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("12_h7mt1")
+volume_db = 10.977
+
+[node name="IGotHit" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("13_52gnc")
+volume_db = 2.796
+
+[node name="Music" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("14_r74ab")
+volume_db = 4.623
+
+[node name="Hit 1" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("15_n0yie")
+
+[node name="Hit 2" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("16_o13s6")
+
+[node name="Wave" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("17_v8hr0")
+volume_db = -2.543
+autoplay = true
+
+[node name="Sword1" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("18_orm5a")
+
+[node name="Sword2" type="AudioStreamPlayer2D" parent="Player"]
+stream = ExtResource("19_pdthe")
+
 [connection signal="body_entered" from="Ranger/rangeArea2D" to="Ranger" method="_on_range_area_2d_body_entered"]
 [connection signal="body_exited" from="Ranger/rangeArea2D" to="Ranger" method="_on_range_area_2d_body_exited"]
 [connection signal="body_shape_entered" from="Ranger/rangeArea2D" to="Ranger" method="_on_range_area_2d_body_shape_entered"]
@@ -435,3 +431,7 @@ volume_db = 2.889
 [connection signal="body_exited" from="Blunder/rangeArea2D" to="Blunder" method="_on_range_area_2d_body_exited"]
 [connection signal="body_shape_entered" from="Blunder/rangeArea2D" to="Blunder" method="_on_range_area_2d_body_shape_entered"]
 [connection signal="body_shape_exited" from="Blunder/rangeArea2D" to="Blunder" method="_on_range_area_2d_body_shape_exited"]
+[connection signal="area_entered" from="Player/Area2D" to="Player" method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Player/Area2D" to="Player" method="_on_area_2d_area_exited"]
+[connection signal="body_shape_entered" from="Player/Area2D" to="Player" method="_on_area_2d_body_shape_entered"]
+[connection signal="body_shape_exited" from="Player/Area2D" to="Player" method="_on_area_2d_body_shape_exited"]

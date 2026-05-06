@@ -139,7 +139,10 @@ scale = Vector2(3.3, 3.3)
 texture = ExtResource("8_5wfkr")
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
-limit_enabled = false
+limit_left = -3050
+limit_top = -2500
+limit_right = 3000
+limit_bottom = 2500
 position_smoothing_enabled = true
 script = ExtResource("9_hwkbi")
 

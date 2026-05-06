@@ -34,6 +34,8 @@ var rng = RandomNumberGenerator.new()
 var wavetimer = 0
 var dead = false
 
+#var CURSCNDIR = str(get_tree().get_current_scene().get_path())
+
 func _ready():
 	add_to_group("player")
 	sword = $RemoteTransform2D/PlayerSprite/SwordSprite
@@ -105,6 +107,9 @@ func _physics_process(delta):
 	if attack_timer <= 0:
 		attack_timer = attack_cooldown
 		try_attack()
+		
+	position.x = clamp(position.x, -3000+350, 3000-400)
+	position.y = clamp(position.y, -2500+400, 2500-400)
 
 func get_enemy_root(node):
 	while node != null:
