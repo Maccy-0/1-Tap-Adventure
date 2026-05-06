@@ -63,6 +63,14 @@ func _input(event):
 			if event.is_action_pressed("action"):
 				heldDown = true
 				pressTime = Time.get_ticks_msec() / 1000.0
+		if event is InputEventKey and event.is_released():
+			if event.is_action_released("action") && heldDown == true:
+				progressBar = $CreditsMenu/UXControl/TextureProgressBar
+				heldTime = 0.0
+				pressTime = 0.0
+				progressBar.value = heldTime
+				heldDown = false
+				resetProgress()
 
 
 func _process(delta: float) -> void:
