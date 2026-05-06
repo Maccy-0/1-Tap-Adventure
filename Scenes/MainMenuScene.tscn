@@ -1,13 +1,15 @@
-[gd_scene load_steps=11 format=3 uid="uid://bitbr4opgixwn"]
+[gd_scene load_steps=13 format=3 uid="uid://bitbr4opgixwn"]
 
 [ext_resource type="Script" uid="uid://brya6tm7de21k" path="res://Scenes/main_menu_scene.gd" id="1_47sjk"]
 [ext_resource type="Texture2D" uid="uid://c4pf3gvx7wmlj" path="res://Todd_Assets/BasicTextures/1Artboard 1-20.jpg" id="1_sb72h"]
+[ext_resource type="Texture2D" uid="uid://30cx7fthmv0e" path="res://Todd_Assets/BasicTextures/background.png" id="3_m73vm"]
 [ext_resource type="Texture2D" uid="uid://q3huqfy3h5jp" path="res://Todd_Assets/BasicTextures/circle.png" id="3_mxhvt"]
 [ext_resource type="Texture2D" uid="uid://cgek01mmsxr0n" path="res://Todd_Assets/BasicTextures/1Artboard 1blank2.png" id="4_gmxq7"]
 [ext_resource type="Texture2D" uid="uid://7i3riur6ynha" path="res://Todd_Assets/BasicTextures/1Artboard 1newbar4.png" id="5_06svm"]
 [ext_resource type="Texture2D" uid="uid://bwsj1v6fjd3h3" path="res://Todd_Assets/BasicTextures/1Artboard 1newbar3.png" id="6_12npo"]
 [ext_resource type="Texture2D" uid="uid://dolop57ev3ex3" path="res://Todd_Assets/BasicTextures/1Artboard 1scale2.png" id="7_12npo"]
 [ext_resource type="AudioStream" uid="uid://83y78ls5qc8n" path="res://Sounds/1tapadventuremainmenu.mp3" id="8_06svm"]
+[ext_resource type="Texture2D" uid="uid://bko00cylf2heo" path="res://Assets/Space bar (with text.png" id="10_i4kjn"]
 
 [sub_resource type="StyleBoxTexture" id="StyleBoxTexture_47sjk"]
 texture = ExtResource("1_sb72h")
@@ -33,6 +35,17 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+self_modulate = Color(0.45372826, 0.45372826, 0.45372826, 1)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("3_m73vm")
+metadata/_edit_use_anchors_ = true
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -251,6 +264,19 @@ allow_greater = true
 fill_mode = 4
 texture_progress = ExtResource("3_mxhvt")
 
+[node name="Background5" type="Panel" parent="."]
+self_modulate = Color(0.120000005, 0.7506667, 1, 0.50980395)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -108.0
+offset_top = 81.0
+offset_right = 107.0
+offset_bottom = 123.0
+grow_horizontal = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
+
 [node name="Title" type="Label" parent="."]
 layout_mode = 1
 anchors_preset = 8
@@ -341,6 +367,103 @@ pivot_offset = Vector2(95, 95)
 allow_greater = true
 fill_mode = 4
 texture_progress = ExtResource("3_mxhvt")
+
+[node name="Background3" type="Panel" parent="."]
+self_modulate = Color(0.120000005, 0.7506667, 1, 0.50980395)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 429.0
+offset_top = 567.0
+offset_right = -414.0
+offset_bottom = -34.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
+
+[node name="Background4" type="Panel" parent="."]
+self_modulate = Color(0.120000005, 0.7506667, 1, 0.50980395)
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 429.0
+offset_top = 508.0
+offset_right = -414.0
+offset_bottom = -93.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxTexture_47sjk")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -215.0
+offset_top = -118.0
+offset_right = 215.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Hold"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("10_i4kjn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "to confirm."
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -215.0
+offset_top = -178.0
+offset_right = 215.0
+offset_bottom = -60.0
+grow_horizontal = 2
+grow_vertical = 0
+alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "Tap"
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 4
+texture = ExtResource("10_i4kjn")
+expand_mode = 2
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer2"]
+layout_mode = 2
+size_flags_vertical = 1
+text = "to cycle menu."
+horizontal_alignment = 2
+vertical_alignment = 1
 
 [connection signal="pressed" from="VBoxContainer/Tutorial" to="." method="_on_tutorial_pressed"]
 [connection signal="pressed" from="VBoxContainer/Endless~" to="." method="_on_endless_pressed"]
