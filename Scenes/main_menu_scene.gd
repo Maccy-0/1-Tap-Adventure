@@ -6,6 +6,7 @@ var confDuration = 1.0
 var pressTime = 0.0
 var progressBar: TextureProgressBar
 var settingsMenu
+var creditsMenu
 #Change to global
 var volumeBar: TextureProgressBar
 var aPlayer: AudioStreamPlayer2D
@@ -15,6 +16,7 @@ func _ready() -> void:
 	$VBoxContainer/Tutorial.grab_focus.call_deferred()
 	settingsMenu = $SettingsMenu
 	volumeBar = $SettingsMenu/Control/TextureProgressBar
+	creditsMenu = $CreditsMenu
 	setVolume()
 	settingsMenu.visible = false
 	Global.mainMenu = 0
@@ -55,6 +57,12 @@ func _input(event):
 				else: if Global.masterVolume >= 10.0:
 					Global.masterVolume = 0.0
 				setVolume()
+				
+	if Global.mainMenu == 1:
+		if event is InputEventKey and event.is_pressed() and heldDown == false:
+			if event.is_action_pressed("action"):
+				heldDown = true
+				pressTime = Time.get_ticks_msec() / 1000.0
 
 
 func _process(delta: float) -> void:
@@ -90,6 +98,24 @@ func _process(delta: float) -> void:
 
 		if heldTime > 0.2:
 			var currentBar = $SettingsMenu/UXControl/TextureProgressBar
+			if currentBar == null: pass
+			else: 
+				var first_child = currentBar
+				if first_child.is_class("TextureProgressBar"):
+					var currentProgress = heldTime - pressTime
+					first_child.value = currentProgress * 100
+					
+	if Global.mainMenu == 1:
+		if heldDown == true:
+			heldTime = Time.get_ticks_msec() / 1000.0 
+			var compare = heldTime - pressTime
+			if compare >= confDuration:
+				heldDown = false
+				heldTime = 0.0
+				_close_credits()
+
+		if heldTime > 0.2:
+			var currentBar = $CreditsMenu/UXControl/TextureProgressBar
 			if currentBar == null: pass
 			else: 
 				var first_child = currentBar
@@ -133,9 +159,17 @@ func _on_settings_pressed() -> void:
 
 
 func _on_credits_pressed() -> void:
-	pass
+	resetProgress()
+	heldTime = 0.0
+	Global.mainMenu = 1
+	creditsMenu.visible = true;
 
 func _close_settings():
 	settingsMenu.visible = false
 	Global.mainMenu = 0
 	$"VBoxContainer/Settings~".grab_focus.call_deferred()
+	
+func _close_credits():
+	creditsMenu.visible = false
+	Global.mainMenu = 0
+	$"VBoxContainer/Credits~".grab_focus.call_deferred()
