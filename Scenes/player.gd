@@ -34,6 +34,11 @@ var rng = RandomNumberGenerator.new()
 var wavetimer = 0
 var dead = false
 
+@export var min_x := -3000 + 350
+@export var max_x := 3000 - 400
+@export var min_y := -2500 + 400
+@export var max_y := 2500 - 400
+
 #var CURSCNDIR = str(get_tree().get_current_scene().get_path())
 
 func _ready():
@@ -108,8 +113,8 @@ func _physics_process(delta):
 		attack_timer = attack_cooldown
 		try_attack()
 		
-	position.x = clamp(position.x, -3000+350, 3000-400)
-	position.y = clamp(position.y, -2500+400, 2500-400)
+	position.x = clamp(position.x, min_x, max_x)
+	position.y = clamp(position.y, min_y, max_y)
 
 func get_enemy_root(node):
 	while node != null:
